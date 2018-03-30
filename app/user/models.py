@@ -7,9 +7,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from flask_login import UserMixin
 
-from fbone.extensions import db
-from fbone.utils import get_current_time
-from fbone.constants import USER, USER_ROLE, ADMIN, INACTIVE, USER_STATUS, \
+from app.extensions import db
+from app.utils import get_current_time
+from app.constants import USER, USER_ROLE, ADMIN, INACTIVE, USER_STATUS, \
     SEX_TYPES, STRING_LEN
 
 

@@ -7,7 +7,8 @@ Flask-Testing
 Flask-WTF
 Jinja2
 MarkupSafe
-MySQL-python
+mysqlclient
+libmysqlclient-dev
 SQLAlchemy
 WTForms
 Werkzeug

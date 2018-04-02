@@ -6,4 +6,3 @@ requests
 sqlalchemy
 flask_httpauth
 passlib
-itsdangerous

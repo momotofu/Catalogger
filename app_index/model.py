@@ -10,7 +10,8 @@ class User(Base):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(80))
+    firstname = Column(String(80))
+    lastname = Column(String(80))
     email = Column(String(80), nullable=False)
     picture = Column(String(80))
     username = Column(String(80))

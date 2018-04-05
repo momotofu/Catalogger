@@ -22,6 +22,7 @@ class Category(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80), nullable=False)
+    # TODO: design database for sub-categories
 
 
 class Item(Base):

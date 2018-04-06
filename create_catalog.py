@@ -8,7 +8,7 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-
+"""
 category = Categories(name="history", depth=0, child_id=0)
 session.add(category)
 session.commit()
@@ -16,15 +16,24 @@ session.commit()
 category = Categories(name="biographies & memoirs", depth=0, child_id=0)
 session.add(category)
 session.commit()
+"""
 
 try:
+    """
+    category = Categories(name="historical", depth=1, child_id=0)
+    session.add(category)
+    session.commit()
+    """
+
     parent_category = session.query(Categories).filter(
         Categories.name=="biographies & memoirs",
         Categories.depth==0).one()
-    print("parent_category: ", parent_category)
-    category = Categories(name="historical", depth=1, child_id=0)
+
+    category = session.query(Categories).filter(
+        Categories.name=="historical",
+        Categories.depth==1,
+        Categories.child_id==0).one()
     parent_category.child_id = category.id
-    session.add(category)
     session.add(parent_category)
     session.commit()
 except:

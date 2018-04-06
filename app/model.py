@@ -22,14 +22,14 @@ class User(Base):
 
 class Categories(Base):
     __tablename__ = 'categories'
-    __table_args__ = (UniqueConstraint('name', 'is_child', 'child_id',
+    __table_args__ = (UniqueConstraint('name', 'depth', 'child_id',
         name='table_constraint'),)
 
     # attributes
     id = Column(Integer, primary_key=True)
     depth = Column(Integer, nullable=False)
     name = Column(String(80), nullable=False)
-    child_id = Column(Integer, ForeignKey('categories.id'))
+    child_id = Column(Integer, ForeignKey('categories.id'), nullable=False)
 
     # relationships
     categories = relationship('Categories')

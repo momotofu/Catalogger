@@ -17,30 +17,15 @@ class User(Base):
     username = Column(String(80))
     password_hash = Column(String(64))
 
-class A0_Categories(Base):
-    __tablename__ = 'a_0_categories'
+class Categories(Base):
+    __tablename__ = 'categories'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80), nullable=False)
-
-# Intermediary table
-class A0_to_A1_Categories(Base):
-    __tablename__ = 'a0_to_a1_categories'
-
-    id = Column(Integer, primary_key=True)
-    category_id = Column(Integer, ForeignKey('a0_categories.id'))
-    subcategory_id = Column(Integer, ForeignKey('a1_categories.id'))
+    child_id = Column(Integer, ForeignKey('categories.id'))
 
     # Relationships
-    a0_categories = relationship(A0_Categories)
-    a1_categories = relationship(A1_Categories)
-
-
-class A1_Categories(Base):
-    __tablename__ = 'a_1_categories'
-
-    id = Column(Integer, primary_key=True)
-    name = Column(String(80), nullable=False)
+    categories = relationship('categories')
 
 
 class Item(Base):
@@ -51,11 +36,11 @@ class Item(Base):
     name = Column(String(80), nullable=False)
     details = Column(String(400))
     picture = Column(String(200))
-    category_id = Column(Integer, ForeignKey('category.id'))
+    category_id = Column(Integer, ForeignKey('categories.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
 
     # relationships
-    category = relationship(Category)
+    category = relationship(Categories)
     user = relationship(User)
 
 engine = create_engine("sqlite:///catalog.db")

@@ -1,4 +1,5 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy import UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -21,14 +22,17 @@ class User(Base):
 
 class Categories(Base):
     __tablename__ = 'categories'
+    __table_args__ = (UniqueConstraint('name', 'is_child', 'child_id',
+        name='table_constraint'),)
 
     # attributes
     id = Column(Integer, primary_key=True)
+    depth = Column(Integer, nullable=False)
     name = Column(String(80), nullable=False)
     child_id = Column(Integer, ForeignKey('categories.id'))
 
     # relationships
-    categories = relationship('categories')
+    categories = relationship('Categories')
 
 
 class Item(Base):

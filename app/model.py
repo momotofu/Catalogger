@@ -72,7 +72,9 @@ class Book(Item):
     page_count = Column(Integer)
 
     # relationships
-    children = relationship('Author', secondary='books_and_authors')
+    children = relationship('Author',
+            secondary='books_and_authors',
+            cascade='all')
 
 
 class Author(Base):
@@ -89,9 +91,8 @@ class Books_And_Authors(Base):
     __tablename__ = 'books_and_authors'
 
     # attributes
-    id = Column(Integer, primary_key=True)
-    book_id = Column(ForeignKey('book.id'), nullable=False)
-    author_id = Column(ForeignKey('author.id'), nullable=False)
+    book_id = Column(ForeignKey('book.id'), primary_key=True)
+    author_id = Column(ForeignKey('author.id'), primary_key=True)
 
     # relationships
     book = relationship('Book')

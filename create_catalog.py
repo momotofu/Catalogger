@@ -7,26 +7,25 @@ Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
-"""
-category = Categories(name="history", depth=0, ParentID=0)
-session.add(category)
-session.commit()
-
-category = Categories(name="biographies & memoirs", depth=0, ParentID=0)
-session.add(category)
-session.commit()
-"""
 try:
+    """
+    """
+    category = Categories(name="history", depth=0, ParentID=0, type='book')
+    session.add(category)
+    session.commit()
+
+    category = Categories(name="biographies & memoirs", depth=0, ParentID=0,
+            type='book')
+    session.add(category)
+    session.commit()
     parent_category = session.query(Categories).filter(
         Categories.name=="biographies & memoirs",
         Categories.depth==0).one()
 
-    """
-    category = Categories(name="historical", depth=1,
+    category = Categories(type='book', name="historical", depth=1,
             ParentID=parent_category.id)
     session.add(category)
     session.commit()
-    """
 
 
     """
@@ -38,9 +37,41 @@ try:
     session.add(category)
     session.commit()
 
-    """
     session.delete(parent_category)
     session.commit()
+    """
+    parent_category = session.query(Categories).filter(
+        Categories.name=='biographies & memoirs',
+        Categories.depth==0).one()
+
+    category = Categories(depth=1,
+            name='specific groups',
+            type='book',
+            ParentID=parent_category.id)
+
+    session.add(category)
+    session.commit()
+
+    book = Book(
+            genre = 'Coming of age',
+            page_count = 352,
+            name = 'educated: a memoir',
+            type = 'book',
+            details = """An unforgettable memoir about a young girl
+            who, kept out of school, leaves her survivalist family
+            and goes on to earn a PhD from Cambridge University""",
+            picture = 'https://images-na.ssl-images-amazon.com/images/I/41eliTRAsHL.jpg',
+            rating = '4.5')
+
+    author = Author(
+            firstname = 'Tara',
+            lastname = 'Westover')
+
+    book.children.append(author)
+    session.add(book)
+    session.commit()
+
+
 except:
     raise
 

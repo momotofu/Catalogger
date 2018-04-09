@@ -47,9 +47,10 @@ class Item(Base):
     # attributes
     id = Column(Integer, primary_key=True)
     name = Column(String(80), nullable=False)
+    type = Column(String(80), nullable=False)
     details = Column(String(400))
     picture = Column(String(200))
-    rating = Column(Integer)
+    rating = Column(String(3))
 
     category_id = Column(Integer, ForeignKey('categories.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
@@ -66,8 +67,12 @@ class Book(Item):
     id = Column(Integer, ForeignKey('item.id'), primary_key=True)
     __mapper_args__ = {'polymorphic_identity':'book',
                        'inherit_condition': (id == Item.id)}
+
     genre = Column(String(80))
     page_count = Column(Integer)
+
+    # relationships
+    children = relationship('Author', secondary='books_and_authors')
 
 
 class Author(Base):
@@ -87,6 +92,10 @@ class Books_And_Authors(Base):
     id = Column(Integer, primary_key=True)
     book_id = Column(ForeignKey('book.id'), nullable=False)
     author_id = Column(ForeignKey('author.id'), nullable=False)
+
+    # relationships
+    book = relationship('Book')
+    author = relationship('Author')
 
 
 engine = create_engine("sqlite:///catalog.db")

@@ -1,5 +1,5 @@
-from app_index.app import create_app
-from app_index import config
+from app.app import create_app
+from app import config
 
 app = create_app('catalog', config=config.DevelopmentConfig)
 

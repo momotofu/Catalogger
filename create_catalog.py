@@ -27,23 +27,6 @@ try:
     session.add(category)
     session.commit()
 
-
-    """
-    category = session.query(Categories).filter(
-        Categories.name=="historical",
-        Categories.depth==1,
-        Categories.ParentID==0).one()
-    category.ParentID = parent_category.id
-    session.add(category)
-    session.commit()
-
-    session.delete(parent_category)
-    session.commit()
-    """
-    parent_category = session.query(Categories).filter(
-        Categories.name=='biographies & memoirs',
-        Categories.depth==0).one()
-
     category = Categories(depth=1,
             name='specific groups',
             type='book',
@@ -71,8 +54,16 @@ try:
     session.add(book)
     session.commit()
 
+    """
+    author = session.query(Author).filter(Author.firstname == 'Tara').one()
+    session.delete(author)
+    session.commit()
+    """
+
+
 
 except:
+    session.rollback()
     raise
 
 

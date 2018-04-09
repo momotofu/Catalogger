@@ -20,8 +20,8 @@ class User(Base):
     password_hash = Column(String(64))
 
 
-class Categories(Base):
-    __tablename__ = 'categories'
+class Category(Base):
+    __tablename__ = 'category'
     __table_args__ = (UniqueConstraint('name', 'depth', 'ParentID',
         name='table_constraint'),)
 
@@ -31,12 +31,12 @@ class Categories(Base):
     name = Column(String(80), nullable=False)
     type = Column(String(80), nullable=False)
     ParentID = Column(Integer,
-        ForeignKey('categories.id',
+        ForeignKey('category.id',
         ondelete='CASCADE'),
         nullable=False)
 
     # relationships
-    Children = relationship('Categories',
+    Children = relationship('Category',
         cascade="all",
         backref=backref('Parent', remote_side=[id]))
 
@@ -52,11 +52,11 @@ class Item(Base):
     picture = Column(String(200))
     rating = Column(String(3))
 
-    category_id = Column(Integer, ForeignKey('categories.id'))
+    category_id = Column(Integer, ForeignKey('category.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
 
     # relationships
-    category = relationship(Categories)
+    category = relationship(Category)
     user = relationship(User)
 
 
@@ -98,5 +98,5 @@ class Books_And_Authors(Base):
     author = relationship('Author')
 
 
-engine = create_engine("sqlite:///catalog.db")
+engine = create_engine('sqlite:///catalog.db')
 Base.metadata.create_all(engine)

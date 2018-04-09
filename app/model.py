@@ -62,12 +62,11 @@ class Item(Base):
 
 class Book(Item):
     __tablename__ = 'book'
-
-    # attributes
-    id = Column(Integer, ForeignKey('item.id'), primary_key=True)
     __mapper_args__ = {'polymorphic_identity':'book',
                        'inherit_condition': (id == Item.id)}
 
+    # attributes
+    id = Column(Integer, ForeignKey('item.id'), primary_key=True)
     genre = Column(String(80))
     page_count = Column(Integer)
 

@@ -29,6 +29,7 @@ class Categories(Base):
     id = Column(Integer, primary_key=True)
     depth = Column(Integer, nullable=False)
     name = Column(String(80), nullable=False)
+    type = Column(String(80), nullable=False)
     ParentID = Column(Integer,
         ForeignKey('categories.id',
         ondelete='CASCADE'),

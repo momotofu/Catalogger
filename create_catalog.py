@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from app.model import Categories, Book, Author, Books_And_Authors, Base
+from app.model import Category, Book, Author, Books_And_Authors, Base
 
 engine = create_engine('sqlite:///catalog.db')
 Base.metadata.bind = engine
@@ -10,24 +10,24 @@ session = DBSession()
 try:
     """
     """
-    category = Categories(name="history", depth=0, ParentID=0, type='book')
+    category = Category(name="history", depth=0, ParentID=0, type='book')
     session.add(category)
     session.commit()
 
-    category = Categories(name="biographies & memoirs", depth=0, ParentID=0,
+    category = Category(name="biographies & memoirs", depth=0, ParentID=0,
             type='book')
     session.add(category)
     session.commit()
-    parent_category = session.query(Categories).filter(
-        Categories.name=="biographies & memoirs",
-        Categories.depth==0).one()
+    parent_category = session.query(Category).filter(
+        Category.name=="biographies & memoirs",
+        Category.depth==0).one()
 
-    category = Categories(type='book', name="historical", depth=1,
+    category = Category(type='book', name="historical", depth=1,
             ParentID=parent_category.id)
     session.add(category)
     session.commit()
 
-    category = Categories(depth=1,
+    category = Category(depth=1,
             name='specific groups',
             type='book',
             ParentID=parent_category.id)
@@ -51,6 +51,7 @@ try:
             lastname = 'Westover')
 
     book.children.append(author)
+    book.item_children.append(category)
     session.add(book)
     session.commit()
 

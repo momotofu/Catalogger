@@ -51,19 +51,17 @@ class Item(Base):
     details = Column(String(400))
     picture = Column(String(200))
     rating = Column(String(3))
-
-    category_id = Column(Integer, ForeignKey('category.id'))
     user_id = Column(Integer, ForeignKey('user.id'))
 
     # relationships
-    category = relationship(Category)
     user = relationship(User)
+    item_children = relationship('Category',
+            secondary='items_and_categories',
+            cascade='all')
 
 
 class Book(Item):
     __tablename__ = 'book'
-    __mapper_args__ = {'polymorphic_identity':'book',
-                       'inherit_condition': (id == Item.id)}
 
     # attributes
     id = Column(Integer, ForeignKey('item.id'), primary_key=True)
@@ -75,6 +73,8 @@ class Book(Item):
             secondary='books_and_authors',
             cascade='all')
 
+    __mapper_args__ = {'polymorphic_identity':'book',
+                       'inherit_condition': (id == Item.id)}
 
 class Author(Base):
     __tablename__ = 'author'
@@ -96,6 +96,19 @@ class Books_And_Authors(Base):
     # relationships
     book = relationship('Book')
     author = relationship('Author')
+
+
+class Items_And_Categories(Base):
+    __tablename__ = 'items_and_categories'
+
+    # attributes
+    category_id = Column(ForeignKey('category.id'), primary_key=True)
+    item_id = Column(ForeignKey('item.id'), primary_key=True)
+
+    # relationships
+    item = relationship('Item')
+    category = relationship('Category')
+
 
 
 engine = create_engine('sqlite:///catalog.db')

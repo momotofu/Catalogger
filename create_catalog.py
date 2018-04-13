@@ -10,6 +10,7 @@ session = DBSession()
 try:
     """
     """
+    """
     category = Category(name="history", depth=0, ParentID=0, type='book')
     session.add(category)
     session.commit()
@@ -40,9 +41,9 @@ try:
             page_count = 352,
             name = 'educated: a memoir',
             type = 'book',
-            details = """An unforgettable memoir about a young girl
+            details = An unforgettable memoir about a young girl
             who, kept out of school, leaves her survivalist family
-            and goes on to earn a PhD from Cambridge University""",
+            and goes on to earn a PhD from Cambridge University,
             picture = 'https://images-na.ssl-images-amazon.com/images/I/41eliTRAsHL.jpg',
             rating = '4.5')
 
@@ -55,19 +56,18 @@ try:
     session.add(book)
     session.commit()
 
-    """
     author = session.query(Author).filter(Author.firstname == 'Tara').one()
     session.delete(author)
     session.commit()
     """
+
+    book = session.query(Book).filter(Book.rating == '4.5').one()
+    session.delete(book)
+    session.commit()
+
 
 
 
 except:
     session.rollback()
     raise
-
-
-
-
-

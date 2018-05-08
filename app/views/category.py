@@ -14,3 +14,7 @@ def allCategories():
     categories = session.query(Category).filter(Category.depth == 0).all()
     return render_template('category/index.html', categories=categories)
 
+@category.route('/test')
+def test():
+    return "<h1>hello</h1>"
+

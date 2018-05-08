@@ -22,4 +22,9 @@ def configure_app(app, config_object=None):
 
 
 def configure_blueprints(app):
+    from .views.category import category
+
+    for blueprint in [category]:
+        app.register_blueprint(blueprint)
+
     return app

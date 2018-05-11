@@ -11,15 +11,19 @@
   #}
   <aside class="col-3 text-center">
     <div class="list-group" data-bind="foreach: categories">
-        <a
-          href="#"
-          class="list-group-item list-group-item-action"
-          data-bind="text: name">
-        </a>
+      <a
+        href="#"
+        class="list-group-item list-group-item-action"
+        data-bind="text: name"></a>
     </div>
     <div class="btn-group mt-3" role="group">
-      <button type="button" class="btn btn-secondary">EDIT</button>
-      <button type="button" class="btn btn-outline-primary">NEW</button>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bind="click: setEditing">EDIT</button>
+      <button
+        type="button"
+        class="btn btn-outline-primary">NEW</button>
     </div>
   </aside>
   <div class="col-9 page">

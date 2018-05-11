@@ -41,6 +41,7 @@ const CategoryList = function(categories) {
 
   this.setEditing = function() {
     this.isEditing(!this.isEditing())
+    console.log(this.isEditing())
   }.bind(this)
 
   this.createCategory = function() {

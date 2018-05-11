@@ -9,15 +9,28 @@
         </tr>
     </tbody>
   #}
-  <aside class="col-3 text-center">
+
+  <aside class="text-center" data-bind="css: { 'col-3': !isEditing, 'col-4':
+  isEditing }">
     <div class="list-group text-left" data-bind="foreach: categories">
       <a
         href="#"
         class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-        <span data-bind="text: name"></span>
-        <span
-          class="badge badge-primary badge-pill"
-          data-bind="if: $parent.isEditing">DELETE</span>
+        <!-- ko ifnot: $parent.isEditing -->
+          <span data-bind="text: name"></span>
+        <!-- /ko -->
+        <!-- ko if: $parent.isEditing -->
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              aria-label="Amount (to the nearest dollar)"
+              data-bind="attr: { placeholder: name }">
+            <div class="input-group-append">
+              <span class="input-group-text">Delete</span>
+            </div>
+          </div>
+        <!-- /ko -->
       </a>
     </div>
     <div class="btn-group mt-3" role="group">

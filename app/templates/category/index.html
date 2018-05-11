@@ -81,7 +81,8 @@
       <!-- /ko -->
     </div>
   </aside>
-  <div class="col-9 page">
+  <div
+    data-bind="attr: { class: isEditing() ? 'col-8 page' : 'col-9 page'}">
   </div>
 </main>
 {% endblock %}

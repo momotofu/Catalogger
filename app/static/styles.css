@@ -25,3 +25,10 @@ ul {
 .category-list {
   transition: all .3s ease;
 }
+
+.page {
+  background-color: lightgray;
+  border-radius: 3px;
+  margin-top: 55px;
+  transition: all .3s ease;
+}

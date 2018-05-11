@@ -40,6 +40,18 @@ class Category(Base):
         cascade="all",
         backref=backref('Parent', remote_side=[id]))
 
+    @property
+    def serialize(self):
+        # returns object data in easily serializeable format
+        return {
+            'id' : self.id,
+            'name' : self.name,
+            'depth' : self.depth,
+            'type' : self.type,
+            'ParentID' : self.ParentID
+        }
+
+
 
 class Item(Base):
     __tablename__ = 'item'

@@ -32,16 +32,29 @@ function keyhandlerBindingFactory(keyCode) {
 // a custom binding to handle the enter key
 ko.bindingHandlers.enterKey = keyhandlerBindingFactory(ENTER_KEY);
 
+// Category model
+class Category {
+  constructor(data, isNew) {
+    // map data keys and values to Category
+    for (let prop in data) {
+      if (data.hasOwnProperty(prop))  {
+        eval(`this.${prop} = data.${prop}`)
+      }
+    }
+  }
+}
+
 // ViewModel
 const CategoryList = function(categories) {
   // map array of passed in categories to an observableArray of category objects
-  this.categories = ko.observableArray(categories)
+  this.categories = ko.observableArray(categories.map((category) => {
+    return new Category(category)
+  }))
 
   this.isEditing = ko.observable(false)
 
   this.setEditing = function() {
     this.isEditing(!this.isEditing())
-    console.log(this.isEditing())
   }.bind(this)
 
   this.createCategory = function() {

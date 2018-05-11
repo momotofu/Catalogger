@@ -29,11 +29,22 @@
           Save
         </button>
       <!-- /ko -->
-      <button
-        type="button"
-        class="btn btn-outline-primary">
-        New
-      </button>
+      <!-- ko ifnot: canAdd -->
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          data-bind="click: setCanAdd">
+          New
+        </button>
+      <!-- /ko -->
+      <!-- ko if: canAdd -->
+        <button
+          type="button"
+          class="btn btn-outline-warning"
+          data-bind="click: setCanAdd">
+          Cancel
+        </button>
+      <!-- /ko -->
     </div>
     <div class="list-group text-left" data-bind="foreach: categories">
       <button

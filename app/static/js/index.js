@@ -51,10 +51,16 @@ const CategoryList = function(categories) {
     return new Category(category)
   }))
 
+  // state
   this.isEditing = ko.observable(false)
+  this.canAdd = ko.observable(false)
 
   this.setEditing = function() {
     this.isEditing(!this.isEditing())
+  }.bind(this)
+
+  this.setCanAdd = function() {
+    this.canAdd(!this.canAdd())
   }.bind(this)
 
   this.createCategory = function() {

@@ -13,7 +13,8 @@ ul {
   list-style-type: none;
 }
 
-.btn:focus {
+.btn:focus,
+.list-group-item:focus {
   outline: none;
 }
 

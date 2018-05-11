@@ -10,11 +10,33 @@
     </tbody>
   #}
 
-  <aside class="text-center" data-bind="css: { 'col-3': !isEditing, 'col-4':
-  isEditing }">
+  <aside
+    data-bind="attr: { class: isEditing() ? 'col-4 category-list' : 'col-3 category-list'}">
+    <div class="btn-group mb-3" role="group">
+      <!-- ko ifnot: isEditing -->
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bind="click: setEditing">
+          Edit
+        </button>
+      <!-- /ko -->
+      <!-- ko if: isEditing -->
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bind="click: setEditing">
+          Save
+        </button>
+      <!-- /ko -->
+      <button
+        type="button"
+        class="btn btn-outline-primary">
+        New
+      </button>
+    </div>
     <div class="list-group text-left" data-bind="foreach: categories">
-      <a
-        href="#"
+      <button
         class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
         <!-- ko ifnot: $parent.isEditing -->
           <span data-bind="text: name"></span>
@@ -31,16 +53,7 @@
             </div>
           </div>
         <!-- /ko -->
-      </a>
-    </div>
-    <div class="btn-group mt-3" role="group">
-      <button
-        type="button"
-        class="btn btn-secondary"
-        data-bind="click: setEditing">EDIT</button>
-      <button
-        type="button"
-        class="btn btn-outline-primary">NEW</button>
+      </button>
     </div>
   </aside>
   <div class="col-9 page">

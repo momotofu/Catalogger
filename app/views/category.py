@@ -1,6 +1,6 @@
 from app.model import Category
 from app.utils.utils import get_session
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 session = get_session('sqlite:///catalog.db')
 category = Blueprint('category',
@@ -9,12 +9,9 @@ category = Blueprint('category',
 
 
 @category.route('/')
-@category.route('/')
+@category.route('/categories')
 def allCategories():
-    categories = session.query(Category).filter(Category.depth == 0).all()
+    # categories = session.query(Category).filter(Category.depth == 0).all()
+    categories = 1
     return render_template('category/index.html', categories=categories)
-
-@category.route('/test')
-def test():
-    return "<h1>hello</h1>"
 

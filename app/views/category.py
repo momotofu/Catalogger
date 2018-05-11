@@ -16,3 +16,9 @@ def allCategories():
     return render_template('category/index.html',
             categories=json.dumps([category.serialize for category in categories]))
 
+@category.route('/categories/JSON')
+def getCategories():
+    categories = session.query(Category).filter(Category.depth == 0).all()
+    return json.dumps([category.serialize for category in categories])
+
+

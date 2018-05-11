@@ -1,2 +1,20 @@
 {% extends "base.html" %}
-
+{% block mainContent %}
+<main class="row">
+  <aside class="col-3 text-center">
+    <div class="list-group">
+      {% for category in categories %}
+        <a href="#" class="list-group-item list-group-item-action">
+          {{ category.name }}
+        </a>
+      {% endfor %}
+    </div>
+    <div class="btn-group mt-3" role="group">
+      <button type="button" class="btn btn-secondary">EDIT</button>
+      <button type="button" class="btn btn-outline-primary">NEW</button>
+    </div>
+  </aside>
+  <div class="col-9 page">
+  </div>
+</main>
+{% endblock %}

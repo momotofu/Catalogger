@@ -21,7 +21,7 @@ def get_session(db_path):
     returns an sqlalchemy session.
     """
 
-    engine = create_engine('sqlite:///restaurantmenu.db')
+    engine = create_engine(db_path)
     Base.metadata.bind = engine
 
     DBSession = sessionmaker(bind=engine)

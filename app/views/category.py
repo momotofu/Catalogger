@@ -11,7 +11,6 @@ category = Blueprint('category',
 @category.route('/')
 @category.route('/categories')
 def allCategories():
-    # categories = session.query(Category).filter(Category.depth == 0).all()
-    categories = 1
+    categories = session.query(Category).filter(Category.depth == 0).all()
     return render_template('category/index.html', categories=categories)
 

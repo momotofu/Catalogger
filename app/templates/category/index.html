@@ -46,25 +46,39 @@
         </button>
       <!-- /ko -->
     </div>
-    <div class="list-group text-left" data-bind="foreach: categories">
-      <button
-        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-        <!-- ko ifnot: $parent.isEditing -->
-          <span data-bind="text: name"></span>
-        <!-- /ko -->
-        <!-- ko if: $parent.isEditing -->
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control"
-              aria-label="Amount (to the nearest dollar)"
-              data-bind="attr: { placeholder: name }">
-            <div class="input-group-append">
-              <a href="#" class="input-group-text">Delete</a>
+    <div class="list-group text-left">
+      <!-- ko if: canAdd -->
+        <button
+          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Amount (to the nearest dollar)"
+                placeholder="i.e. Plant food">
             </div>
-          </div>
-        <!-- /ko -->
-      </button>
+        </button>
+      <!-- /ko -->
+      <!-- ko foreach: categories -->
+        <button
+          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <!-- ko ifnot: $parent.isEditing -->
+            <span data-bind="text: name"></span>
+          <!-- /ko -->
+          <!-- ko if: $parent.isEditing -->
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Amount (to the nearest dollar)"
+                data-bind="attr: { placeholder: name }">
+              <div class="input-group-append">
+                <a href="#" class="input-group-text">Delete</a>
+              </div>
+            </div>
+          <!-- /ko -->
+        </button>
+      <!-- /ko -->
     </div>
   </aside>
   <div class="col-9 page">

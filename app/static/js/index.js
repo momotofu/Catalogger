@@ -45,6 +45,8 @@ class Category {
   }
 }
 
+// TODO: set up api calls
+
 // ViewModel
 const CategoryList = function(categories) {
   const self = this

@@ -4,33 +4,28 @@
   <aside
     data-bind="attr: { class: isEditing() ? 'col-lg-4 category-list' : 'col-lg-3 category-list'}">
     <div class="btn-group mb-3" role="group">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bind="click: setEditing">
-          <!-- ko ifnot: isEditing -->
-            Edit
-          <!-- /ko -->
-          <!-- ko if: isEditing -->
-            Save
-          <!-- /ko -->
-        </button>
-      <!-- ko ifnot: canAdd -->
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          data-bind="click: onAddButtonClick">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bind="click: setEditing">
+        <!-- ko ifnot: isEditing -->
+          Edit
+        <!-- /ko -->
+        <!-- ko if: isEditing -->
+          Save
+        <!-- /ko -->
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        data-bind="click: onAddButtonClick">
+        <!-- ko ifnot: canAdd -->
           New
-        </button>
-      <!-- /ko -->
-      <!-- ko if: canAdd -->
-        <button
-          type="button"
-          class="btn btn-outline-warning"
-          data-bind="click: onAddButtonClick">
+        <!-- /ko -->
+        <!-- ko if: canAdd -->
           Cancel
-        </button>
-      <!-- /ko -->
+        <!-- /ko -->
+      </button>
     </div>
     <div class="list-group text-left">
       <button

@@ -64,6 +64,22 @@ const CategoryList = function(categories) {
     return this.activeCategoryId() == id ? 'active' : ''
   }.bind(this)
 
+  // methods
+  this.onAddButtonClick = function() {
+    this.setCanAdd()
+
+    const el = document.getElementById('canAddInput')
+
+    if (this.canAdd()) {
+      el.focus()
+    } else {
+      el.value = ""
+    }
+
+  }.bind(this)
+
+  this.onEditButtonClick
+
   // setters
   this.setEditing = function() {
     this.isEditing(!this.isEditing())

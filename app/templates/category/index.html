@@ -1,39 +1,25 @@
 {% extends "base.html" %}
 {% block mainContent %}
 <main class="row">
-  {#
-  <tbody data-bind="foreach: people">
-        <tr>
-            <td data-bind="text: firstName"></td>
-            <td data-bind="text: lastName"></td>
-        </tr>
-    </tbody>
-  #}
-
   <aside
     data-bind="attr: { class: isEditing() ? 'col-lg-4 category-list' : 'col-lg-3 category-list'}">
     <div class="btn-group mb-3" role="group">
-      <!-- ko ifnot: isEditing -->
         <button
           type="button"
           class="btn btn-secondary"
           data-bind="click: setEditing">
-          Edit
+          <!-- ko ifnot: isEditing -->
+            Edit
+          <!-- /ko -->
+          <!-- ko if: isEditing -->
+            Save
+          <!-- /ko -->
         </button>
-      <!-- /ko -->
-      <!-- ko if: isEditing -->
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bind="click: setEditing">
-          Save
-        </button>
-      <!-- /ko -->
       <!-- ko ifnot: canAdd -->
         <button
           type="button"
           class="btn btn-outline-primary"
-          data-bind="click: setCanAdd">
+          data-bind="click: onAddButtonClick">
           New
         </button>
       <!-- /ko -->
@@ -41,23 +27,23 @@
         <button
           type="button"
           class="btn btn-outline-warning"
-          data-bind="click: setCanAdd">
+          data-bind="click: onAddButtonClick">
           Cancel
         </button>
       <!-- /ko -->
     </div>
     <div class="list-group text-left">
-      <!-- ko if: canAdd -->
-        <button
-          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="i.e. Plant food">
-            </div>
+      <button
+        data-bind="attr: { class : canAdd() ? 'list-group-item list-group-item-action justify-content-between align-items-center d-flex' : 'd-none' }">
+          <div class="input-group">
+            <input
+              type="text"
+              id="canAddInput"
+              class="form-control"
+              placeholder="i.e. Plant food"
+              autofocus>
+          </div>
         </button>
-      <!-- /ko -->
       <!-- ko foreach: categories -->
         <button
           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"

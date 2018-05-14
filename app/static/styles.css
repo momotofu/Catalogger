@@ -15,7 +15,7 @@ ul {
 
 .btn:focus,
 .list-group-item:focus {
-  outline: none;
+  box-shadow: none;
 }
 
 .main-content {

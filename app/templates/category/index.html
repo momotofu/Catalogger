@@ -36,7 +36,8 @@
               id="canAddInput"
               class="form-control"
               placeholder="i.e. Plant food"
-              autofocus>
+              autofocus
+              data-bind="click: inputClicked, enterKey: createNewCategory">
           </div>
         </button>
       <!-- ko foreach: categories -->
@@ -53,7 +54,7 @@
               <input
                 type="text"
                 class="form-control"
-                data-bind="attr: { placeholder: name }">
+                data-bind="click: $parent.inputClicked, attr: { placeholder: name }">
               <div class="input-group-append">
                 <a href="#" class="input-group-text">Delete</a>
               </div>

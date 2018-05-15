@@ -21,6 +21,10 @@ ul {
   outline: none;
 }
 
+.list-group-item:hover {
+  cursor: pointer;
+}
+
 .main-content {
   margin-top: 120px;
 }

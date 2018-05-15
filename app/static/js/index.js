@@ -99,14 +99,29 @@ const CategoryList = function(categories) {
 
   this.createNewCategory = function(context, event) {
     const el = event.target
+    const name = el.value
 
-    if (el.value.length > 0) {
+    if (name.length > 0) {
       // create a new category and update DOM
       this.categories.unshift(new Category({
-        name : el.value
+        name
       }, true))
 
+      // clear and hide input element
+      el.value = ""
+      this.canAdd(false)
+
       // update server
+      $.post({
+        url : '/categories/new',
+        data : {
+          name
+        },
+        success: function(data) {
+          console.log('data: ', data)
+        },
+        dataType: 'json'
+      })
       // update todo object with correct info
     }
   }

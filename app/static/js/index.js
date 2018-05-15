@@ -102,9 +102,9 @@ const CategoryList = function(categories) {
 
     if (el.value.length > 0) {
       // create a new category and update DOM
-      this.categories.push(new Category({
+      this.categories.unshift(new Category({
         name : el.value
-      }))
+      }, true))
 
       // update server
       // update todo object with correct info

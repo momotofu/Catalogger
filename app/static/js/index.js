@@ -39,12 +39,26 @@ ko.bindingHandlers.escapeKey = keyhandlerBindingFactory(ESCAPE_KEY);
 
 // Category model
 class Category {
-  constructor(data, isNew) {
-    // map data keys and values to Category
-    for (let prop in data) {
-      if (data.hasOwnProperty(prop))  {
-        eval(`this.${prop} = data.${prop}`)
+  constructor(data, isPlaceholder) {
+    // keep track of whether or not Category is a dummy,
+    // and need's to be updated from the server
+    this.isPlaceholder = isPlaceholder
+
+    if (!isPlaceholder) {
+      // map data keys and values to Category
+      for (let prop in data) {
+        if (data.hasOwnProperty(prop))  {
+          eval(`this.${prop} = data.${prop}`)
+        }
       }
+
+    } else {
+      // give object filler attribute values to satisify the DOM
+      this.id = Math.random().toString(36).substring(7);
+      this.name = data.name
+      this.depth = -1
+      this.type = -1
+      this.parentId = -1
     }
 
   }
@@ -83,8 +97,18 @@ const CategoryList = function(categories) {
 
   }.bind(this)
 
-  this.createNewCategory = function() {
-    console.log('enter pressed: ', arguments)
+  this.createNewCategory = function(context, event) {
+    const el = event.target
+
+    if (el.value.length > 0) {
+      // create a new category and update DOM
+      this.categories.push(new Category({
+        name : el.value
+      }))
+
+      // update server
+      // update todo object with correct info
+    }
   }
 
   this.inputClicked = function(context, event) {

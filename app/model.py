@@ -48,7 +48,7 @@ class Category(Base):
             'name' : self.name,
             'depth' : self.depth,
             'type' : self.type,
-            'ParentID' : self.ParentID
+            'parentId' : self.ParentID
         }
 
 

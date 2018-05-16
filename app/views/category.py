@@ -12,9 +12,15 @@ category = Blueprint('category',
 @category.route('/')
 @category.route('/categories')
 def allCategories():
+    # grab categories from database
     categories = session.query(Category).filter(Category.depth == 0).all()
+
+    # serialize and prepare category objects for json
+    categories_serialized = [category.serialize for category in categories]
+    categories_serialized.reverse()
+
     return render_template('category/index.html',
-            categories=json.dumps([category.serialize for category in categories].reverse()))
+            categories=json.dumps(categories_serialized))
 
 
 @category.route('/categories/new', methods=['POST'])

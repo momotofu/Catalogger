@@ -71,6 +71,7 @@ const CategoryList = function(categories) {
   const self = this
 
   // map array of passed in categories to an observableArray of category objects
+  console.log(categories)
   if (categories) { // protect against null list
     this.categories = ko.observableArray(categories.map((category) => {
       return new Category(category)

@@ -17,8 +17,8 @@
       </button>
       <button
         type="button"
-        class="btn btn-outline-primary"
-        data-bind="click: onAddButtonClick">
+        class="btn"
+        data-bind="css: canAdd() ? 'btn-outline-warning' : 'btn-outline-primary', click: onAddButtonClick">
         <!-- ko ifnot: canAdd -->
           New
         <!-- /ko -->

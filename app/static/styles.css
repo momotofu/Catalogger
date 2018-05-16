@@ -33,9 +33,19 @@ ul {
   transition: all .3s ease;
 }
 
-.page {
+.category-list__group {
+  width: 100%;
+  height: 100%;
   background-color: lightgray;
   border-radius: 3px;
+}
+
+.page {
+  width: 100%;
+  height: 100%;
   margin-top: 55px;
+  background-color: lightgray;
+  border-radius: 3px;
+  min-height: 181px;
   transition: all .3s ease;
 }

@@ -78,18 +78,20 @@ const CategoryList = function(categories) {
     return this.activeCategoryId() == id ? 'active' : ''
   }.bind(this)
 
-  this.test = function() {
-    console.log('test')
-  }
-
 
   // setters
   this.setEditing = function() {
     this.isEditing(!this.isEditing())
+
+    if (this.isEditing() && this.canAdd()) {
+      this.setCanAdd()
+    }
+
   }.bind(this)
 
   this.setCanAdd = function() {
     this.canAdd(!this.canAdd())
+
   }.bind(this)
 
   this.setActiveCategoryId = function(id) {

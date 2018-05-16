@@ -39,7 +39,7 @@ ul {
 
 .category-list__group {
   width: 100%;
-  height: calc(100% - 64px);
+  min-height: 148px;
   background-color: lightgray;
   border-radius: 3px;
 }
@@ -50,6 +50,6 @@ ul {
   margin-top: 55px;
   background-color: lightgray;
   border-radius: 3px;
-  min-height: 181px;
+  min-height: 148px;
   transition: all .3s ease;
 }

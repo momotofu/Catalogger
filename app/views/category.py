@@ -19,8 +19,7 @@ def allCategories():
     categories_serialized = [category.serialize for category in categories]
     categories_serialized.reverse()
 
-    return render_template('category/index.html',
-            categories=json.dumps(categories_serialized))
+    return render_template('category/index.html', categories=json.dumps(categories_serialized))
 
 
 @category.route('/categories/new', methods=['POST'])

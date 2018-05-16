@@ -2,7 +2,10 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet"
+          type="text/css"
+          href={{ url_for('static',
+                  filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}></link>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',
     filename='styles.css') }}">
     {% block head %}
@@ -51,7 +54,8 @@
   <script src={{ url_for('static',
                  filename='node_modules/knockout/build/output/knockout-latest.js') }}></script>
    <script src={{ url_for('static', filename='js/index.js') }}></script>
-   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+   {# <script defer
+     src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script> #}
   {% block scripts %}
   {% endblock %}
 </html>

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/momotofu/catalog#readme",
   "dependencies": {
+    "bootstrap": "^4.1.1",
     "jquery": "^3.3.1",
     "knockout": "^3.4.2",
     "npm": "^5.8.0"

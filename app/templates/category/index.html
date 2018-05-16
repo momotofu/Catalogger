@@ -6,8 +6,8 @@
     <div class="btn-group mb-3" role="group">
       <button
         type="button"
-        class="btn btn-secondary"
-        data-bind="click: setEditing">
+        class="btn"
+        data-bind="css: isEditing() ? 'btn-outline-success' : 'btn-secondary', click: setEditing">
         <!-- ko ifnot: isEditing -->
           Edit
         <!-- /ko -->
@@ -47,7 +47,10 @@
             css: $parent.isActiveClass(id),
             click: $parent.setActiveCategoryId.bind(this, id)">
           <!-- ko ifnot: $parent.isEditing -->
-            <span data-bind="text: name"></span>
+            <span
+              class="list-group-item__label"
+              data-bind="text: name"
+              ></span>
           <!-- /ko -->
           <!-- ko if: $parent.isEditing -->
             <div class="input-group">

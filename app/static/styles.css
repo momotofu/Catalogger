@@ -25,6 +25,10 @@ ul {
   cursor: pointer;
 }
 
+.list-group-item__label {
+  overflow: auto;
+}
+
 .main-content {
   margin-top: 120px;
 }

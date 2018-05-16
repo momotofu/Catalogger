@@ -32,12 +32,12 @@
         data-bind="attr: { class : canAdd() ? 'list-group-item list-group-item-action justify-content-between align-items-center d-flex' : 'd-none' }">
           <div class="input-group">
             <input
+              autofocus
               type="text"
               id="canAddInput"
               class="form-control"
               placeholder="i.e. Plant food"
-              autofocus
-              data-bind="click: inputClicked, enterKey: createNewCategory">
+              data-bind="click: inputClicked, enterKey: createNewCategory, escapeKey: onAddButtonClick">
           </div>
         </button>
       <!-- ko foreach: categories -->

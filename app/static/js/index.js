@@ -1,7 +1,7 @@
 'use strict';
 
 const ENTER_KEY = 13
-const ESCAPE_KEY = 17
+const ESCAPE_KEY = 27
 
 // A factory function we can use to create binding handlers for specific
 // keycodes.
@@ -77,6 +77,10 @@ const CategoryList = function(categories) {
   this.isActiveClass = function(id) {
     return this.activeCategoryId() == id ? 'active' : ''
   }.bind(this)
+
+  this.test = function() {
+    console.log('test')
+  }
 
 
   // setters

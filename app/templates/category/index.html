@@ -37,7 +37,7 @@
               id="canAddInput"
               class="form-control"
               placeholder="i.e. Plant food"
-              data-bind="click: inputClicked, enterKey: createNewCategory, escapeKey: onAddButtonClick">
+              data-bind="click: inputClicked, enterKey: createCategory, escapeKey: onAddButtonClick">
           </div>
         </button>
       <!-- ko foreach: categories -->
@@ -59,7 +59,12 @@
                 class="form-control"
                 data-bind="click: $parent.inputClicked, attr: { placeholder: name }">
               <div class="input-group-append">
-                <a href="#" class="input-group-text">Delete</a>
+                <a
+                  href="#"
+                  class="input-group-text"
+                  data-bind="click: $parent.deleteCategory.bind(this, id)">
+                    Delete
+                </a>
               </div>
             </div>
           <!-- /ko -->

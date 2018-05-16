@@ -125,7 +125,7 @@ const CategoryList = function(categories) {
 
   }.bind(this)
 
-  this.createNewCategory = function(context, event) {
+  this.createCategory = function(context, event) {
     const el = event.target
     const name = el.value
 
@@ -154,16 +154,31 @@ const CategoryList = function(categories) {
     }
   }
 
-  this.createCategory = function() {
-  };
+  this.deleteCategory = function(id, context, event) {
+    // handle event object
+    this.inputClicked(context, event)
 
-  this.deleteCategory = function() {
-  }
+    // delete category object from DOM
+    this.categories.remove(context)
+
+    // remove category from server
+    $.post({
+      url : `/categories/${id}/delete`,
+      data : {
+        name
+      },
+      success: function(data) {
+        console.log('data: ', data)
+      },
+      dataType: 'json'
+    })
+
+  }.bind(this)
 
   this.inputClicked = function(context, event) {
     event.preventDefault()
     event.stopPropagation()
-  }.bind(this)
+  }
 
 }
 

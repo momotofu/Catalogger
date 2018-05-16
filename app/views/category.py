@@ -52,4 +52,14 @@ def newCategory():
         raise
 
 
+@category.route('/categories/<int:category_id>/delete', methods=['POST'])
+def deleteCategory(category_id):
+    try:
+        session.query(Category).filter(Category.id == category_id).delete()
+        session.commit()
 
+        return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+
+    except:
+        session.rollback()
+        raise

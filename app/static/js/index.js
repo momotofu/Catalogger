@@ -71,9 +71,13 @@ const CategoryList = function(categories) {
   const self = this
 
   // map array of passed in categories to an observableArray of category objects
-  this.categories = ko.observableArray(categories.map((category) => {
-    return new Category(category)
-  }))
+  if (categories) { // protect against null list
+    this.categories = ko.observableArray(categories.map((category) => {
+      return new Category(category)
+    }))
+  } else {
+    this.categories = ko.observableArray([])
+  }
 
   // state
   this.isEditing = ko.observable(false)

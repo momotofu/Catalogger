@@ -80,7 +80,7 @@ const CategoryList = function(categories) {
 
 
   // setters
-  this.setEditing = function() {
+  this.setIsEditing = function() {
     this.isEditing(!this.isEditing())
 
     if (this.isEditing() && this.canAdd()) {
@@ -91,6 +91,10 @@ const CategoryList = function(categories) {
 
   this.setCanAdd = function() {
     this.canAdd(!this.canAdd())
+
+    if (this.isEditing() && this.canAdd) {
+      this.setIsEditing()
+    }
 
   }.bind(this)
 

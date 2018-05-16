@@ -7,7 +7,8 @@
       <button
         type="button"
         class="btn"
-        data-bind="css: isEditing() ? 'btn-outline-success' : 'btn-secondary', click: setEditing">
+        data-bind="css: isEditing() ? 'btn-outline-success' : 'btn-secondary',
+        click: setIsEditing">
         <!-- ko ifnot: isEditing -->
           Edit
         <!-- /ko -->
@@ -72,8 +73,7 @@
       <!-- /ko -->
     </div>
   </aside>
-  <div
-    data-bind="attr: { class: isEditing() ? 'col-8 page' : 'col-9 page'}">
+  <div data-bind="attr: { class: isEditing() ? 'col-8 page' : 'col-9 page'}">
   </div>
 </main>
 {% endblock %}

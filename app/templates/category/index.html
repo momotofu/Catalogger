@@ -45,7 +45,7 @@
           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
           data-bind="
             css: $parent.isActiveClass(id),
-            click: $parent.setActiveCategoryId(id)">
+            click: $parent.setActiveCategoryId.bind(this, id)">
           <!-- ko ifnot: $parent.isEditing -->
             <span data-bind="text: name"></span>
           <!-- /ko -->

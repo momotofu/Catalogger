@@ -70,16 +70,6 @@ class Category {
 const CategoryList = function(categories) {
   const self = this
 
-  // map array of passed in categories to an observableArray of category objects
-  console.log(categories)
-  if (categories) { // protect against null list
-    this.categories = ko.observableArray(categories.map((category) => {
-      return new Category(category)
-    }))
-  } else {
-    this.categories = ko.observableArray([])
-  }
-
   // state
   this.isEditing = ko.observable(false)
   this.canAdd = ko.observable(false)
@@ -87,6 +77,33 @@ const CategoryList = function(categories) {
   this.isActiveClass = function(id) {
     return this.activeCategoryId() == id ? 'active' : ''
   }.bind(this)
+
+
+  // setters
+  this.setEditing = function() {
+    this.isEditing(!this.isEditing())
+  }.bind(this)
+
+  this.setCanAdd = function() {
+    this.canAdd(!this.canAdd())
+  }.bind(this)
+
+  this.setActiveCategoryId = function(id) {
+    this.activeCategoryId(id)
+  }.bind(this)
+
+
+  // map array of passed in categories to an observableArray of category objects
+  if (categories.length > 0) { // protect against null list
+    this.categories = ko.observableArray(categories.map((category) => {
+      return new Category(category)
+    }))
+
+    this.setActiveCategoryId(this.categories()[0].id)
+  } else {
+    this.categories = ko.observableArray([])
+  }
+
 
   // methods
   this.onAddButtonClick = function() {
@@ -131,29 +148,17 @@ const CategoryList = function(categories) {
     }
   }
 
-  this.inputClicked = function(context, event) {
-    event.preventDefault()
-    event.stopPropagation()
-  }.bind(this)
-
-  // setters
-  this.setEditing = function() {
-    this.isEditing(!this.isEditing())
-  }.bind(this)
-
-  this.setCanAdd = function() {
-    this.canAdd(!this.canAdd())
-  }.bind(this)
-
-  this.setActiveCategoryId = function(id) {
-    this.activeCategoryId(id)
-  }.bind(this)
-
   this.createCategory = function() {
   };
 
   this.deleteCategory = function() {
   }
+
+  this.inputClicked = function(context, event) {
+    event.preventDefault()
+    event.stopPropagation()
+  }.bind(this)
+
 }
 
 

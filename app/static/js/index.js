@@ -132,10 +132,19 @@ const CategoryList = function(categories) {
     this.setIsEditing()
 
     if (!this.isEditing()) {
-      console.log('edited categories: ', this.editedCategories)
-      this.editedCategories = []
+      // update server
+      $.post({
+        url : '/categories/edit',
+        data : this.editedCategories,
+        success: successHandler.bind(this),
+        dataType: 'json'
+      })
 
-    // update server
+      function successHandler(data) {
+        // success message
+        console.log('Successfuly updated categories on the server.')
+        this.editedCategories = []
+      }
     }
 
   }.bind(this)
@@ -174,12 +183,12 @@ const CategoryList = function(categories) {
         data : {
           name
         },
-        success: handleSuccess.bind(this),
+        success: successHandler.bind(this),
         dataType: 'json'
       })
 
       // success handler for AJAX POST request
-      function handleSuccess(data) {
+      function successHandler(data) {
         // success message
         console.log(`Successfuly created "${data.name}" category on the server.`)
 

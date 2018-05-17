@@ -134,8 +134,10 @@ const CategoryList = function(categories) {
     if (!this.isEditing()) {
       // update server
       $.post({
-        url : '/categories/edit',
-        data : this.editedCategories,
+        url : '/categories/update',
+        data : {
+          categories : JSON.stringify(this.editedCategories)
+        },
         success: successHandler.bind(this),
         dataType: 'json'
       })
@@ -143,6 +145,8 @@ const CategoryList = function(categories) {
       function successHandler(data) {
         // success message
         console.log('Successfuly updated categories on the server.')
+
+        // reset editedCategories
         this.editedCategories = []
       }
     }

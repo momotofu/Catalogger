@@ -77,6 +77,7 @@ const CategoryList = function(categories) {
   this.isActiveClass = function(id) {
     return this.activeCategoryId() == id ? 'active' : ''
   }.bind(this)
+  this.editedCategories = []
 
 
   // setters
@@ -116,6 +117,29 @@ const CategoryList = function(categories) {
 
 
   // methods
+  this.categoryEdited = function(context, event) {
+    // update DOM
+    if (event.target.value.length > 0 && event.target.placeholder != event.target.value) {
+      context.name = event.target.value
+
+      // add category object to editedCategories list
+      this.editedCategories.push(context)
+    }
+
+  }.bind(this)
+
+  this.onEditButtonClick = function() {
+    this.setIsEditing()
+
+    if (!this.isEditing()) {
+      console.log('edited categories: ', this.editedCategories)
+      this.editedCategories = []
+
+    // update server
+    }
+
+  }.bind(this)
+
   this.onAddButtonClick = function() {
     this.setCanAdd()
 

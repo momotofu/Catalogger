@@ -8,7 +8,7 @@
         type="button"
         class="btn"
         data-bind="css: isEditing() ? 'btn-outline-success' : 'btn-secondary',
-        click: setIsEditing">
+        click: onEditButtonClick">
         <!-- ko ifnot: isEditing -->
           Edit
         <!-- /ko -->
@@ -58,7 +58,7 @@
               <input
                 type="text"
                 class="form-control"
-                data-bind="click: $parent.inputClicked, attr: { placeholder: name }">
+                data-bind="event: { focusout: $parent.categoryEdited }, click: $parent.inputClicked, attr: { placeholder: name }">
               <div class="input-group-append">
                 <a
                   href="#"

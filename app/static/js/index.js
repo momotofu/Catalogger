@@ -139,7 +139,6 @@ const CategoryList = function(categories) {
 
       // update the DOM
       this.categories.unshift(category)
-      console.log('categories before: ', this.categories())
 
       // clear and hide input element
       el.value = ""

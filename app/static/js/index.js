@@ -134,10 +134,12 @@ const CategoryList = function(categories) {
     const name = el.value
 
     if (name.length > 0) {
-      // create a new category and update DOM
-      this.categories.unshift(new Category({
-        name
-      }, true))
+      // create a new dummy category and get a reference to its id
+      const category = new Category({ name }, true)
+
+      // update the DOM
+      this.categories.unshift(category)
+      console.log('categories before: ', this.categories())
 
       // clear and hide input element
       el.value = ""
@@ -149,12 +151,19 @@ const CategoryList = function(categories) {
         data : {
           name
         },
-        success: function(data) {
-          console.log('data: ', data)
-        },
+        success: handleSuccess.bind(this),
         dataType: 'json'
       })
-      // update todo object with correct info
+
+      // success handler for AJAX POST request
+      function handleSuccess(data) {
+        // success message
+        console.log(`Successfuly created "${data.name}" category on the server.`)
+
+        // update the dummy category object with real data
+        for (let key in data) category[key] = data[key]
+      }
+
     }
   }
 

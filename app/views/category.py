@@ -1,7 +1,7 @@
 from app.model import Category
 from app.utils.utils import get_session
 from flask import Blueprint, render_template, request
-import json
+import json, time
 
 session = get_session('sqlite:///catalog.db')
 category = Blueprint('category',
@@ -24,6 +24,7 @@ def allCategories():
 
 @category.route('/categories/new', methods=['POST'])
 def newCategory():
+    time.sleep(5)
     params = request.form
 
     # ensure name key and name value

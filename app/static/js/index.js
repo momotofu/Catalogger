@@ -151,11 +151,12 @@ const CategoryList = function(categories) {
       }
     }
 
+    this.setFirstCategoryBorderRadius()
+
   }.bind(this)
 
   this.onAddButtonClick = function() {
     this.setCanAdd()
-    this.setFirstCategoryBorderRadius()
 
     const el = document.getElementById('canAddInput')
 
@@ -164,6 +165,8 @@ const CategoryList = function(categories) {
     } else {
       el.value = ""
     }
+
+    this.setFirstCategoryBorderRadius()
 
   }.bind(this)
 
@@ -182,7 +185,7 @@ const CategoryList = function(categories) {
       }
     }
 
-  }
+  }.bind(this)
 
   this.createCategory = function(context, event) {
     const el = event.target
@@ -216,6 +219,8 @@ const CategoryList = function(categories) {
 
         // update the dummy category object with real data
         for (let key in data) category[key] = data[key]
+
+        this.setFirstCategoryBorderRadius()
       }
 
     }
@@ -240,6 +245,8 @@ const CategoryList = function(categories) {
       },
       dataType: 'json'
     })
+
+    this.setFirstCategoryBorderRadius()
 
   }.bind(this)
 

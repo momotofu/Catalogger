@@ -87,6 +87,14 @@
 {% endblock %}
 {% block scripts %}
   <script type="text/javascript">
-    ko.applyBindings(new CategoryList({{ categories | safe }}));
+
+    // closure to keep categoryList private
+    (function() {
+      // setup category list
+      const categoryList = new CategoryList( {{ categories | safe }} )
+      ko.applyBindings(categoryList)
+      categoryList.setFirstCategoryBorderRadius()
+    })()
+
   </script>
 {% endblock %}

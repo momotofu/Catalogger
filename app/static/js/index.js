@@ -64,7 +64,7 @@ class Category {
   }
 }
 
-// TODO: set up api calls
+// TODO: seperate concerns by using KO components
 
 // ViewModel
 const CategoryList = function(categories) {
@@ -168,6 +168,7 @@ const CategoryList = function(categories) {
   }.bind(this)
 
   this.setFirstCategoryBorderRadius = function() {
+    console.log('called')
     // change first list item border-radius
     const firstCategory = document.getElementById('category-list').children[1]
 

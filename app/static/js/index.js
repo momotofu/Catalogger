@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const ENTER_KEY = 13
 const ESCAPE_KEY = 27
@@ -15,26 +15,26 @@ function keyhandlerBindingFactory(keyCode) {
         if (event.keyCode === keyCode) {
           valueAccessor().call(this, data, event)
         }
-      };
+      }
 
       // create a valueAccessor with the options that we would want to pass to the event binding
       newValueAccessor = function () {
         return {
           keyup: wrappedHandler
-        };
-      };
+        }
+      }
 
       // call the real event binding's init function
       ko.bindingHandlers.event.init(element, newValueAccessor, allBindingsAccessor, data, bindingContext)
     }
-  };
+  }
 }
 
 // a custom binding to handle the enter key
-ko.bindingHandlers.enterKey = keyhandlerBindingFactory(ENTER_KEY);
+ko.bindingHandlers.enterKey = keyhandlerBindingFactory(ENTER_KEY)
 
 // another custom binding, this time to handle the escape key
-ko.bindingHandlers.escapeKey = keyhandlerBindingFactory(ESCAPE_KEY);
+ko.bindingHandlers.escapeKey = keyhandlerBindingFactory(ESCAPE_KEY)
 
 
 // Category model
@@ -54,7 +54,7 @@ class Category {
 
     } else {
       // give object filler attribute values to satisify the DOM
-      this.id = Math.random().toString(36).substring(7);
+      this.id = Math.random().toString(36).substring(7)
       this.name = data.name
       this.depth = -1
       this.type = -1
@@ -155,6 +155,7 @@ const CategoryList = function(categories) {
 
   this.onAddButtonClick = function() {
     this.setCanAdd()
+    this.setFirstCategoryBorderRadius()
 
     const el = document.getElementById('canAddInput')
 
@@ -165,6 +166,22 @@ const CategoryList = function(categories) {
     }
 
   }.bind(this)
+
+  this.setFirstCategoryBorderRadius = function() {
+    // change first list item border-radius
+    const firstCategory = document.getElementById('category-list').children[1]
+
+    if (firstCategory) {
+      if (!this.canAdd()) {
+        firstCategory.style.borderTopRightRadius = '3px'
+        firstCategory.style.borderTopLeftRadius = '3px'
+      } else {
+        firstCategory.style.borderTopRightRadius = '0px'
+        firstCategory.style.borderTopLeftRadius = '0px'
+      }
+    }
+
+  }
 
   this.createCategory = function(context, event) {
     const el = event.target
@@ -231,6 +248,3 @@ const CategoryList = function(categories) {
   }
 
 }
-
-
-

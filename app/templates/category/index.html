@@ -86,8 +86,8 @@
 </div>
 {% endblock %}
 {% block scripts %}
+  <script src={{ url_for('static', filename='js/index.js') }}></script>
   <script type="text/javascript">
-
     // closure to keep categoryList private
     (function() {
       // setup category list

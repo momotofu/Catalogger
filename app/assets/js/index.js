@@ -1,4 +1,4 @@
-'use strict'
+import ko from 'ko'
 
 const ENTER_KEY = 13
 const ESCAPE_KEY = 27

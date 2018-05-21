@@ -3,20 +3,13 @@ const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const ManifestRevisionPlugin = require('manifest-revision-webpack-plugin')
 
-const rootAssetPath = './app/assets'
+const rootAssetPath = './app'
 const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = (env, options) => {
     return {
       mode: options.mode,
-      entry: {
-          app_js: [
-            `${rootAssetPath}/js/index.js`
-          ],
-          app_css: [
-            `${rootAssetPath}/styles/main.css`
-          ]
-      },
+      entry: `${rootAssetPath}/index.js`,
       output: {
         path: path.resolve(__dirname, './app/build/public'),
           publicPath: 'http://localhost:2992/assets/',

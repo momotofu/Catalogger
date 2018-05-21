@@ -1,5 +1,6 @@
 from flask import Flask
 from app.config import Config as default_config
+from flask_webpack import Webpack
 
 
 def create_app(app_name, config=None):
@@ -9,6 +10,11 @@ def create_app(app_name, config=None):
 
     app = configure_app(Flask(__name__), config)
     configure_blueprints(app)
+
+    # setup webpack for assets
+    webpack = Webpack()
+    webpack.init_app(app)
+
     return app
 
 

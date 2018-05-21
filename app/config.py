@@ -10,3 +10,4 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    WEBPACK_MANIFEST_PATH = './build/manifest.json'

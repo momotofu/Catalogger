@@ -51,6 +51,7 @@
   </body>
    {# <script defer
      src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script> #}
+   {{ stylesheet_tag('app_css') | safe }}
    {{ javascript_tag('app_js') | safe }}
   {% block scripts %}
   {% endblock %}

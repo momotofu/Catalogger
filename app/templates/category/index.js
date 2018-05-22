@@ -54,6 +54,14 @@ const CategoryList = function(categories, delegate) {
   this.editedCategories = []
 
 
+  // getters
+  this.getCategory = function(id) {
+    return this.categories().filter((category) => {
+      return category.id === id
+    })[0]
+  }
+
+
   // setters
   this.setIsEditing = function() {
     this.isEditing(!this.isEditing())
@@ -75,7 +83,7 @@ const CategoryList = function(categories, delegate) {
 
   this.setActiveCategoryId = function(id) {
     this.activeCategoryId(id)
-    this.delegate.setActiveCategoryId(id)
+    this.delegate.setActiveCategory(this.getCategory(id))
   }.bind(this)
 
 

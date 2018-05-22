@@ -4,16 +4,30 @@ import * as ko from 'knockout'
 const Items = function() {
 
   // state
-  this.activeCategory = null
+  this.activeCategory = ko.observable(null)
+  this.isEditing = ko.observable(false)
+  this.activeCategoryName = ko.computed(function() {
+    if (this.activeCategory()) {
+      return this.activeCategory().name
+    } else {
+      return 'item'
+    }
+  }, this)
 
-  // CategoryList delegate method
+  /**
+   * start - CategoryList delegate methods
+   */
   this.setActiveCategory = function(category) {
-    this.activeCategory = category
-    console.log('category: ', category)
+    this.activeCategory(category)
   }.bind(this)
 
+  this.setIsEditing = function(isEditing) {
+    this.isEditing(isEditing)
+  }.bind(this)
 
-  // methods
+  /**
+   * end - CategoryList delegate methods
+   */
 
 }
 

@@ -65,6 +65,7 @@ const CategoryList = function(categories, delegate) {
   // setters
   this.setIsEditing = function() {
     this.isEditing(!this.isEditing())
+    this.delegate.setIsEditing(this.isEditing())
 
     if (this.isEditing() && this.canAdd()) {
       this.setCanAdd()

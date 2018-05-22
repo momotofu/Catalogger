@@ -2,6 +2,7 @@
 {% block mainContent %}
 <div class="row">
   <aside
+    id='categories'
     data-bind="attr: { class: isEditing() ? 'col-lg-4 category-list' : 'col-lg-3 category-list'}">
     <div class="btn-group mb-3" role="group">
       <button
@@ -73,12 +74,11 @@
       <!-- /ko -->
     </div>
   </aside>
-  <main data-bind="attr: { class: isEditing() ? 'col-8 page-container' : 'col-9 page-container'}">
+  <main id="items" data-bind="attr: { class: isEditing() ? 'col-8 page-container' : 'col-9 page-container'}">
     <button
       type="button"
       class="btn btn-primary mb-3"
-      data-bind="click: onEditButtonClick">
-        Create an item
+      data-bind="text: activeCategoryName">
     </button>
     <div class="page">
     </div>
@@ -91,9 +91,15 @@
     (function() {
       // setup items
       const items = new Items()
+
       // setup category list
       const categoryList = new CategoryList( {{ categories | safe }}, items )
-      ko.applyBindings(categoryList)
+
+      // applyBinds
+      ko.applyBindings(categoryList, document.getElementById('categories'))
+      ko.applyBindings(items, document.getElementById('items'))
+
+      // set border radius for first category in list
       categoryList.setFirstCategoryBorderRadius()
     })()
   </script>

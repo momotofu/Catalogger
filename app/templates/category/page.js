@@ -40,7 +40,7 @@ const Page = function() {
     const id = this.activeCategory().id
     const baseURL = getBaseURLFrom(window.location.href)
 
-    window.location.href = `${baseURL}/item/${id}/new`
+    window.location.href = `${baseURL}/items/${id}/new`
   }.bind(this)
 
 }

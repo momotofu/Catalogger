@@ -2,12 +2,6 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet"
-          type="text/css"
-          href={{ url_for('static',
-                  filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}></link>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',
-    filename='styles.css') }}">
     {% block head %}
       <title>
         {% block title %} Catalog {% endblock %}
@@ -51,8 +45,8 @@
   </body>
    {# <script defer
      src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script> #}
-   {{ stylesheet_tag('app_css') | safe }}
-   {{ javascript_tag('app_js') | safe }}
+    {{ javascript_tag('app') | safe }}
+    {{ javascript_tag('vender_css') | safe }}
   {% block scripts %}
   {% endblock %}
 </html>

@@ -86,7 +86,6 @@
 </div>
 {% endblock %}
 {% block scripts %}
-  <script src={{ url_for('static', filename='js/index.js') }}></script>
   <script type="text/javascript">
     // closure to keep categoryList private
     (function() {
@@ -95,6 +94,5 @@
       ko.applyBindings(categoryList)
       categoryList.setFirstCategoryBorderRadius()
     })()
-
   </script>
 {% endblock %}

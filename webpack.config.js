@@ -2,14 +2,21 @@ const path = require('path')
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const ManifestRevisionPlugin = require('manifest-revision-webpack-plugin')
+const TimeFixPlugin = require('time-fix-plugin')
 
-const rootAssetPath = './app'
+const rootAssetPath = './app/static'
 const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = (env, options) => {
     return {
-      mode: options.mode,
-      entry: `${rootAssetPath}/index.js`,
+      entry: {
+          app: [
+            path.resolve(__dirname, 'app/templates/app.js')
+          ],
+          vender_css: [
+            path.resolve(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css')
+          ],
+      },
       output: {
         path: path.resolve(__dirname, './app/build/public'),
           publicPath: 'http://localhost:2992/assets/',
@@ -22,8 +29,8 @@ module.exports = (env, options) => {
       module: {
           rules: [
               {
-                test: /\.js$/i, use: 'script-loader',
-                exclude: /node_modules/
+                test: /\.(py|pyc|html)$/,
+                loader: 'ignore-loader'
               },
               {
                 test: /\.css$/i,
@@ -31,6 +38,10 @@ module.exports = (env, options) => {
                   devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
                   'css-loader'
                 ]
+              },
+              {
+                test: /\.js$/i, use: 'babel-loader',
+                exclude: /node_modules/
               },
               {
                 test: /\.(jpe?g|png|gif|svg([\?]?.*))$/i,
@@ -42,14 +53,13 @@ module.exports = (env, options) => {
           ]
       },
       plugins: [
-          new MiniCssExtractPlugin({
-            filename: "[name].[hash].css",
-            chunkFilename: "[id].[hash].css"
-          }),
+        new MiniCssExtractPlugin({
+          filename: "[name].[hash].css",
+          chunkFilename: "[id].[hash].css"
+        }),
         new ManifestRevisionPlugin(path.join('./app/build', 'manifest.json'), {
-              rootAssetPath: rootAssetPath,
-              ignorePaths: ['/styles', '/scripts']
-          })
+          rootAssetPath: './app/static'
+        })
       ]
   }
 }

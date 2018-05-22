@@ -1,4 +1,4 @@
-# Catalog
+# Catalog (WARNING: readme needs to be updated)
 Create categories and items.
 
 ## Usage

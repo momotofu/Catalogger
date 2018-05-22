@@ -41,8 +41,8 @@ class Category {
 // TODO: seperate concerns by using KO components
 
 // ViewModel
-const CategoryList = function(categories) {
-  const self = this
+const CategoryList = function(categories, delegate) {
+  this.delegate = delegate
 
   // state
   this.isEditing = ko.observable(false)
@@ -75,6 +75,7 @@ const CategoryList = function(categories) {
 
   this.setActiveCategoryId = function(id) {
     this.activeCategoryId(id)
+    this.delegate.setActiveCategoryId(id)
   }.bind(this)
 
 

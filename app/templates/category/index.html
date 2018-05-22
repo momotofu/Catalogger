@@ -89,8 +89,10 @@
   <script type="text/javascript">
     // closure to keep categoryList private
     (function() {
+      // setup items
+      const items = new Items()
       // setup category list
-      const categoryList = new CategoryList( {{ categories | safe }} )
+      const categoryList = new CategoryList( {{ categories | safe }}, items )
       ko.applyBindings(categoryList)
       categoryList.setFirstCategoryBorderRadius()
     })()

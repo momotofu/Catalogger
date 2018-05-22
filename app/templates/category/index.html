@@ -75,11 +75,13 @@
     </div>
   </aside>
   <main id="items" data-bind="attr: { class: isEditing() ? 'col-8 page-container' : 'col-9 page-container'}">
-    <button
-      type="button"
-      class="btn btn-primary mb-3"
-      data-bind="text: activeCategoryName">
-    </button>
+    <div class="d-flex justify-content-end align-items-baseline">
+      <button
+        type="button"
+        class="btn btn-success mb-3">
+          New item
+      </button>
+    </div>
     <div class="page">
     </div>
   </main>

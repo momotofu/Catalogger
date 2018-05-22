@@ -10,7 +10,7 @@ const Items = function() {
     if (this.activeCategory()) {
       return this.activeCategory().name
     } else {
-      return 'item'
+      return 'Item'
     }
   }, this)
 

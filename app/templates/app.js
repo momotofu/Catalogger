@@ -2,6 +2,7 @@
 import CategoryList from './category'
 import Items from './category/items'
 import * as ko from 'knockout'
+import * as $ from 'jquery'
 
 // import CSS
 import './main.css'
@@ -10,3 +11,4 @@ import './main.css'
 window.CategoryList = CategoryList
 window.Items = Items
 window.ko = ko
+window.$ = $

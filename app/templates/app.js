@@ -1,6 +1,6 @@
 // import app JavaScript
 import CategoryList from './category'
-import page from './category/page'
+import Page from './category/page'
 
 // import vendor js
 import * as ko from 'knockout'

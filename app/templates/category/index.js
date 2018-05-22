@@ -1,5 +1,5 @@
 import * as ko from 'knockout'
-import keyhandlerBindingFactory from '../utils/js/utils'
+import { keyhandlerBindingFactory } from '../utils/js/utils'
 
 const ENTER_KEY = 13
 const ESCAPE_KEY = 27

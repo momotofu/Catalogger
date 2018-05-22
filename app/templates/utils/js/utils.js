@@ -25,4 +25,12 @@ function keyhandlerBindingFactory(keyCode) {
   }
 }
 
-export default keyhandlerBindingFactory
+function getBaseURLFrom(urlString) {
+  const pathArray = location.href.split( '/' )
+  const protocol = pathArray[0]
+  const host = pathArray[2]
+
+  return protocol + '//' + host
+}
+
+export { getBaseURLFrom, keyhandlerBindingFactory }

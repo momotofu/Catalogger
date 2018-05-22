@@ -1,7 +1,8 @@
 import * as ko from 'knockout'
+import { getBaseURLFrom } from '../utils/js/utils'
 
 // ViewModel
-const Items = function() {
+const Page = function() {
 
   // state
   this.activeCategory = ko.observable(null)
@@ -14,6 +15,7 @@ const Items = function() {
     }
   }, this)
 
+
   /**
    * start - CategoryList delegate methods
    */
@@ -24,11 +26,23 @@ const Items = function() {
   this.setIsEditing = function(isEditing) {
     this.isEditing(isEditing)
   }.bind(this)
-
   /**
    * end - CategoryList delegate methods
    */
 
+
+  // methods
+  this.sendToCreateItem = function(context, event) {
+    console.log(context, event)
+    event.preventDefault()
+    event.stopPropagation()
+
+    const id = this.activeCategory().id
+    const baseURL = getBaseURLFrom(window.location.href)
+
+    window.location.href = `${baseURL}/item/${id}/new`
+  }.bind(this)
+
 }
 
-export default Items
+export default Page

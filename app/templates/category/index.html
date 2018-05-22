@@ -78,7 +78,8 @@
     <div class="d-flex justify-content-end align-items-baseline">
       <button
         type="button"
-        class="btn btn-outline-success mb-3">
+        class="btn btn-outline-success mb-3"
+        data-bind="click: sendToCreateItem">
           New item
       </button>
     </div>
@@ -89,7 +90,6 @@
 {% endblock %}
 {% block scripts %}
   <script type="text/javascript">
-    // closure to keep categoryList private
     (function() {
       // setup page ViewModel
       const page = new Page()

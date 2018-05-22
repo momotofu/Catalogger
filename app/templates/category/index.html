@@ -74,7 +74,7 @@
       <!-- /ko -->
     </div>
   </aside>
-  <main id="items" data-bind="attr: { class: isEditing() ? 'col-8 page-container' : 'col-9 page-container'}">
+  <main id="page" data-bind="attr: { class: isEditing() ? 'col-8 page-container' : 'col-9 page-container'}">
     <div class="d-flex justify-content-end align-items-baseline">
       <button
         type="button"
@@ -91,17 +91,17 @@
   <script type="text/javascript">
     // closure to keep categoryList private
     (function() {
-      // setup items
-      const items = new Items()
+      // setup page ViewModel
+      const page = new Page()
 
-      // setup category list
-      const categoryList = new CategoryList( {{ categories | safe }}, items )
+      // setup categorylist ViewModel
+      const categoryList = new CategoryList( {{ categories | safe }}, page )
 
-      // applyBinds
+      // applyBindings
       ko.applyBindings(categoryList, document.getElementById('categories'))
-      ko.applyBindings(items, document.getElementById('items'))
+      ko.applyBindings(page, document.getElementById('page'))
 
-      // set border radius for first category in list
+      // set border radius for first visible category in list
       categoryList.setFirstCategoryBorderRadius()
     })()
   </script>

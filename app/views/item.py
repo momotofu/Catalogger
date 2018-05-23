@@ -16,7 +16,7 @@ def getItems(category_id):
 def createItem(category_id):
     if request.method == 'GET':
         try:
-            session.query(Category).filter(Category.id == category_id).one()
+            category = session.query(Category).filter(Category.id == category_id).one()
             return render_template('item/index.html', category=category)
 
         except:

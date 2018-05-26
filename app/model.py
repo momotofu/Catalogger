@@ -58,8 +58,9 @@ class Item(Base):
 
     # attributes
     id = Column(Integer, primary_key=True)
-    name = Column(String(80), nullable=False)
     type = Column(String(80), nullable=False)
+    name = Column(String(80), nullable=False)
+    image_url = Column(String(80))
     details = Column(String(400))
     picture = Column(String(200))
     rating = Column(String(3))

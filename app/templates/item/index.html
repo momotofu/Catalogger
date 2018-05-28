@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block navLinks %}
+  <li class="nav-item">
+    <a href="{{ url_for('category.allCategories') }}" class="nav-link">back</a>
+  </li>
+{% endblock %}
 {% block mainContent %}
 <div class="row justify-content-center">
   <div class="col-lg-6">

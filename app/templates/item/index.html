@@ -2,18 +2,16 @@
 {% block mainContent %}
 <div class="row justify-content-center">
   <div class="col-lg-6">
+    <h5 class="text-muted text-center mb-3" >Create a new item for "{{ category.name }}"</h5>
     <div class="card mb-4">
       <form class="card-body card-body-form" action={{ url_for('item.createItem',
         category_id=category.id) }} enctype=multipart/form-data method="POST">
-        <h5 class="card-title">New item</h5>
-        <h6 class="card-subtitle text-muted mb-4">for {{ category.name }}</h6>
         <div class="input-group mb-3">
-          <div class="col-12 mb-3 image-upload" id="image-container">
+          <div class="col-12 mb-3 image-upload-container" id="image-container">
             <img src="..."
-              class="opacity-0 img-fluid"
+              class="d-none img-fluid"
               style="border-radius: 4px"
-              id="image-preview"
-              alt="uploaded-image">
+              id="image-preview">
           </div>
           <input type="file" class="form-control" id="image-input" name="image">
           <div class="input-group-append">
@@ -37,7 +35,7 @@
         <input class="btn btn-primary btn-lg btn-block" type="submit" value="CREATE">
       </form>
     </div>
-    <a class="btn btn-outline-secondary btn-lg btn-block mr-3 ml-3" href={{ url_for('category.allCategories') }}>
+    <a class="btn btn-outline-secondary btn-cancel btn-lg d-block" href={{ url_for('category.allCategories') }}>
       CANCEL
     </a>
   </div>

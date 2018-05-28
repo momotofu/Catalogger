@@ -15,7 +15,9 @@ const CreateItemViewModel = function() {
         // set the image preview element src to the uploaded file
         this.imagePreview
           .css('background-image', `url(${event.target.result})`)
-          .removeClass('d-none')
+          .css('background-position', 'center')
+          .css('background-repeat', 'no-repeate')
+          .css('background-size', 'cover')
       }.bind(this)
 
       reader.readAsDataURL(input.files[0])

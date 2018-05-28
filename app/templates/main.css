@@ -13,33 +13,31 @@ ul {
   list-style-type: none;
 }
 
-.image-upload-container {
-  border-radius: 4px;
-  background: #757575;
-  width: 100%;
-  height: 300px;
-  width: 498px;
+.image-upload-preview {
   align-items: center;
-  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: #757575;
+  border-radius: 4px;
   display: flex;
+  height: 300px;
+  justify-content: center;
+  width: 100%;
+  width: 498px;
 }
 
-.image-upload-container:hover {
+.image-upload-preview:hover {
   cursor: pointer;
+  opacity: 0.8;
 }
 
-.image-upload-container:target {
-  content: 'test';
-}
-
-.image-upload-container:hover::after {
+.image-upload-preview:hover::after {
   content: 'Upload image';
   width: 75px;
   height: 75px;
   border: 3px solid white;
   border-radius: 150px;
-  color: white;
-  font-weight: bold;
   line-height: 13;
   font-size: 16px;
   letter-spacing: 0.1px;
@@ -47,12 +45,16 @@ ul {
   text-indent: -19px;
 }
 
-.image-upload-container:hover::before {
+.image-upload-preview:hover::before {
   content: '+';
   position: absolute;
   font-size: 27px;
-  font-weight: bold;
+}
+
+.image-upload-preview:hover::before,
+.image-upload-preview:hover::after {
   color: white;
+  font-weight: bold;
 }
 
 .btn:focus,

@@ -38,8 +38,6 @@ class Category {
   }
 }
 
-// TODO: seperate concerns by using KO components
-
 // ViewModel
 const CategoryList = function(categories, delegate) {
   this.delegate = delegate

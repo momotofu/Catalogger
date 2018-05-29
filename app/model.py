@@ -71,6 +71,19 @@ class Item(Base):
             secondary='items_and_categories',
             cascade='all')
 
+    @property
+    def serialize(self):
+        # returns object data in easily serializeable format
+        return {
+            'id' : self.id,
+            'type' : self.type,
+            'name' : self.name,
+            'image_name' : self.image_name,
+            'details' : self.details,
+            'rating' : self.rating,
+            'user_id' : self.user_id
+        }
+
 
 class Book(Item):
     __tablename__ = 'book'

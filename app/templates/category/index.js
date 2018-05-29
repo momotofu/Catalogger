@@ -42,6 +42,7 @@ class Category {
 const CategoryList = function(categories, delegate) {
   this.delegate = delegate
 
+
   // state
   this.isEditing = ko.observable(false)
   this.canAdd = ko.observable(false)

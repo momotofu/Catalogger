@@ -6,6 +6,7 @@ from flask import current_app as app, flash
 from werkzeug.utils import secure_filename
 
 import os
+import json
 
 session = get_session('sqlite:///catalog.db')
 item = Blueprint('item',
@@ -15,7 +16,19 @@ item = Blueprint('item',
 @item.route('/')
 @item.route('/category/<int:category_id>/items')
 def getItems(category_id):
-    pass
+    try:
+        items = (
+            session.query(Item)
+                .join(Item.item_children)
+                .filter(Category.id == category_id)
+                .all()
+        )
+
+        return json.dumps([item.serialize for item in items])
+
+    except:
+        raise
+
 
 @item.route('/category/<int:category_id>/items/new', methods=['GET', 'POST'])
 def createItem(category_id):

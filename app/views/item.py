@@ -1,7 +1,7 @@
 from app.model import Item, Category
 from app.utils.utils import get_session, allowed_file, get_rand_string
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask import current_app as app
+from flask import current_app as app, flash
 
 from werkzeug.utils import secure_filename
 
@@ -45,14 +45,22 @@ def createItem(category_id):
                 image_name = (get_rand_string() + '.').join([str(x) for x in secure_filename(image.filename).split('.')])
                 path = os.path.join(app.config['IMAGE_FOLDER'], image_name)
                 image.save(path)
-                item.image = image_name
+                item.image_name = image_name
 
             # connect item to its category
             item.item_children.append(category)
 
+            # add item to database
+            session.add(item)
+            session.commit()
+
+            # send feedback to the user
+            flash("%s created!" % item.name)
+
             return redirect(url_for("category.allCategories"))
 
         except:
+            session.rollback()
             raise
 
 

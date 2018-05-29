@@ -60,9 +60,8 @@ class Item(Base):
     id = Column(Integer, primary_key=True)
     type = Column(String(80), nullable=False)
     name = Column(String(80), nullable=False)
-    image_url = Column(String(80))
+    image_name = Column(String(80))
     details = Column(String(400))
-    picture = Column(String(200))
     rating = Column(String(3))
     user_id = Column(Integer, ForeignKey('user.id'))
 

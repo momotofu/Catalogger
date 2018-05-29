@@ -33,7 +33,7 @@ def createItem(category_id):
 
             # create an item object from form params
             item = Item(
-                type=category,
+                type=category.name,
                 name=params['name'],
                 details=params['details'])
 

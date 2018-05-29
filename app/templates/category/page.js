@@ -57,14 +57,26 @@ const Page = function() {
   }.bind(this)
 
   this.getItemsForActiveCategory = function() {
-    // get item JSON
+    // set up get URL
     const id = this.activeCategory().id
     const baseURL = getBaseURLFrom(window.location.href)
     const url = `${baseURL}/category/${id}/items`
 
-    $.get(url, function(data) {
-      console.log('success with data: ', data)
+    // get item JSON
+    $.get({
+      url,
+      success: handleSuccess.bind(this)
     })
+
+    function handleSuccess(data) {
+      console.log('successfuly retreived item data')
+      const dataJSON = JSON.parse(data)
+
+      // update displayed items
+      this.items(dataJSON.map((itemData) => {
+        return new Item(itemData)
+      }))
+    }
 
   }
 

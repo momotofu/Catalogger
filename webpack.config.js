@@ -2,7 +2,7 @@ const path = require('path')
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const ManifestRevisionPlugin = require('manifest-revision-webpack-plugin')
-const TimeFixPlugin = require('time-fix-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const rootAssetPath = './app/static'
 const devMode = process.env.NODE_ENV !== 'production'
@@ -53,6 +53,7 @@ module.exports = (env, options) => {
           ]
       },
       plugins: [
+        new UglifyJsPlugin(),
         new MiniCssExtractPlugin({
           filename: "[name].[hash].css",
           chunkFilename: "[id].[hash].css"

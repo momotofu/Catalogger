@@ -1,14 +1,12 @@
 import random, string
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
 from app.model import Base
 
 
-
-def allowed_file(filename, app):
+def allowed_file(filename, config):
     return '.' in filename and \
-            filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+            filename.rsplit('.', 1)[1].lower() in config['ALLOWED_EXTENSIONS']
 
 
 def get_rand_string():

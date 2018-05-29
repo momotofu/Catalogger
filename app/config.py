@@ -3,11 +3,11 @@ class Config(object):
     TESTING = False
     DATABASE_URI = 'sqlite:///catalog.db'
 
-    IMAGE_FOLDER = 'app_index/static/images'
+    IMAGE_FOLDER = 'app/static/images'
     ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'png', 'gif'])
     SECRET_KEY = 'super_secret_key'
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+    WEBPACK_MANIFEST_PATH = './build/manifest.json'
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    WEBPACK_MANIFEST_PATH = './build/manifest.json'

@@ -15,6 +15,7 @@ ul {
 
 .item-card {
   padding-bottom: 48px;
+  border: none;
 }
 
 .item-card__img-top {
@@ -69,6 +70,10 @@ ul {
 .image-upload-preview:hover::after {
   color: white;
   font-weight: bold;
+}
+
+.box-shadow {
+  box-shadow: 0 3px 2px rgba(0, 0, 0, .06);
 }
 
 .btn:focus,

@@ -83,7 +83,14 @@
           New item
       </button>
     </div>
-    <div class="page">
+    <div class="page" data-bind="foreach: items">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title" data-bind="text: name"></h5>
+          <p class="card-text" data-bind="text: details"></p>
+        </div>
+      </div>
     </div>
   </main>
 </div>

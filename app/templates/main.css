@@ -13,8 +13,18 @@ ul {
   list-style-type: none;
 }
 
-.item-card-img-top {
+.item-card {
+  padding-bottom: 48px;
+}
+
+.item-card__img-top {
   min-height: 180px;
+}
+
+.item-card__controls {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 }
 
 .image-upload-preview {

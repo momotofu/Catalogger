@@ -30,8 +30,9 @@ def configure_app(app, config_object=None):
 def configure_blueprints(app):
     from .views.category import category
     from .views.item import item
+    from .api.api import api
 
-    for blueprint in [category, item]:
+    for blueprint in [category, item, api]:
         app.register_blueprint(blueprint)
 
     return app

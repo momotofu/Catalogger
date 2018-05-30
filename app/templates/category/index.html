@@ -85,7 +85,8 @@
     </div>
     <div class="page" data-bind="foreach: items">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
+        <img class="card-img-top" data-bind="attr: { src:
+        $parent.getItemImageURL(image_name) }">
         <div class="card-body">
           <h5 class="card-title" data-bind="text: name"></h5>
           <p class="card-text" data-bind="text: details"></p>

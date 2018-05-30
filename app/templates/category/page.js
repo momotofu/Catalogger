@@ -45,19 +45,9 @@ const Page = function() {
    */
 
 
-  // methods
-  this.sendToCreateItem = function(context, event) {
-    event.preventDefault()
-    event.stopPropagation()
-
-    const id = this.activeCategory().id
-    const baseURL = getBaseURLFrom(window.location.href)
-
-    window.location.href = `${baseURL}/category/${id}/items/new`
-  }.bind(this)
-
+  // getters
   this.getItemsForActiveCategory = function() {
-    // set up get URL
+    // setup get URL
     const id = this.activeCategory().id
     const baseURL = getBaseURLFrom(window.location.href)
     const url = `${baseURL}/category/${id}/items`
@@ -76,9 +66,31 @@ const Page = function() {
       this.items(dataJSON.map((itemData) => {
         return new Item(itemData)
       }))
+
+      console.log('Items: ', this.items())
     }
 
   }
+
+  this.getItemImageURL = function(imageName) {
+    // setup URL
+    const baseURL = getBaseURLFrom(window.location.href)
+    const url = `${baseURL}/images/${imageName}`
+
+    return url
+  }
+
+
+  // methods
+  this.sendToCreateItem = function(context, event) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    const id = this.activeCategory().id
+    const baseURL = getBaseURLFrom(window.location.href)
+
+    window.location.href = `${baseURL}/category/${id}/items/new`
+  }.bind(this)
 
 }
 

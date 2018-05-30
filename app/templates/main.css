@@ -99,6 +99,12 @@ ul {
   transition: all .3s ease;
 }
 
+@media only screen and (max-width: 990px) {
+  .category-list {
+    margin-bottom: 3rem;
+  }
+}
+
 .category-list__group {
   width: 100%;
   height: calc(100% - 54px);

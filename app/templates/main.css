@@ -13,6 +13,10 @@ ul {
   list-style-type: none;
 }
 
+.item-card-img-top {
+  min-height: 180px;
+}
+
 .image-upload-preview {
   align-items: center;
   background-position: center;
@@ -99,6 +103,7 @@ ul {
   background-color: lightgray;
   border-radius: 3px;
   min-height: 148px;
+  margin: 0;
 }
 
 .page-container {

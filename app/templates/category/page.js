@@ -66,8 +66,6 @@ const Page = function() {
       this.items(dataJSON.map((itemData) => {
         return new Item(itemData)
       }))
-
-      console.log('Items: ', this.items())
     }
 
   }
@@ -77,7 +75,7 @@ const Page = function() {
     const baseURL = getBaseURLFrom(window.location.href)
     const url = `${baseURL}/images/${imageName}`
 
-    return url
+    return `url(${url})`
   }
 
 

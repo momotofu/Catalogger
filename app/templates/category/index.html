@@ -74,7 +74,7 @@
       <!-- /ko -->
     </div>
   </aside>
-  <main id="page" data-bind="attr: { class: isEditing() ? 'col-8 page-container' : 'col-9 page-container'}">
+  <main id="page" data-bind="attr: { class: isEditing() ? 'col-lg-8 page-container' : 'col-lg-9 page-container'}">
     <div class="d-flex justify-content-end align-items-baseline">
       <button
         type="button"
@@ -83,13 +83,19 @@
           New item
       </button>
     </div>
-    <div class="page" data-bind="foreach: items">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" data-bind="attr: { src:
-        $parent.getItemImageURL(image_name) }">
-        <div class="card-body">
-          <h5 class="card-title" data-bind="text: name"></h5>
-          <p class="card-text" data-bind="text: details"></p>
+    <div class="page row pt-3 pb-3 pr-3 d-flex flex-row flex-wrap" data-bind="foreach: items">
+      <div class="col-lg-4" style="padding-right: 0">
+        <div class="card">
+          <div class="card-img-top item-card-img-top" data-bind="style: {
+            'background-image': $parent.getItemImageURL(image_name),
+            'background-position': 'center',
+            'background-repeat': 'no-repeat',
+            'background-size': 'cover'}">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title" data-bind="text: name"></h5>
+            <p class="card-text" data-bind="text: details"></p>
+          </div>
         </div>
       </div>
     </div>

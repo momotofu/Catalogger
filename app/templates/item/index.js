@@ -16,7 +16,7 @@ const CreateItemViewModel = function() {
         this.imagePreview
           .css('background-image', `url(${event.target.result})`)
           .css('background-position', 'center')
-          .css('background-repeat', 'no-repeate')
+          .css('background-repeat', 'no-repeat')
           .css('background-size', 'cover')
       }.bind(this)
 

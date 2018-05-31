@@ -4,8 +4,8 @@ import Page from './category/page'
 import CreateItemViewModel from './item'
 
 // import vendor js
+import 'bootstrap'
 import * as ko from 'knockout'
-import * as $ from 'jquery'
 
 // import CSS
 import './main.css'
@@ -17,4 +17,3 @@ window.CreateItemViewModel = CreateItemViewModel
 
 // expose frameworks to global scope
 window.ko = ko
-window.$ = $

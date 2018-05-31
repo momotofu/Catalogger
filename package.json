@@ -24,7 +24,6 @@
     "image-webpack-loader": "^4.2.0",
     "jquery": "^3.3.1",
     "knockout": "^3.4.2",
-    "knockout-postbox": "^0.6.0",
     "manifest-revision-webpack-plugin": "^0.4.1",
     "npm": "^5.8.0",
     "style-loader": "^0.21.0",

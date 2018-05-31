@@ -1,3 +1,5 @@
+import * as ko from 'knockout'
+
 // A factory function we can use to create binding handlers for specific
 // keycodes.
 function keyhandlerBindingFactory(keyCode) {

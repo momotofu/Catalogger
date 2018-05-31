@@ -3,6 +3,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const ManifestRevisionPlugin = require('manifest-revision-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const webpack = require('webpack')
 
 const rootAssetPath = './app/static'
 const devMode = process.env.NODE_ENV !== 'production'
@@ -13,10 +14,9 @@ module.exports = (env, options) => {
           app: [
             path.resolve(__dirname, './app/templates/app.js')
           ],
-          venders: [
-            path.resolve(__dirname, './node_modules/bootstrap/dist/js/bootstrap.min.js'),
+          vender_css: [
             path.resolve(__dirname, './node_modules/bootstrap/dist/css/bootstrap.min.css')
-          ],
+          ]
       },
       output: {
         path: path.resolve(__dirname, './build/public'),
@@ -25,7 +25,10 @@ module.exports = (env, options) => {
           chunkFilename: '[id].[chunkhash].js'
       },
       resolve: {
-        extensions: ['.js', '.css']
+        extensions: ['.js', '.css'],
+        alias: {
+          'ko': path.resolve(__dirname, './node_modules/build/output/knockout-latest.js')
+        }
       },
       module: {
           rules: [
@@ -65,6 +68,10 @@ module.exports = (env, options) => {
           ]
       },
       plugins: [
+        new webpack.ProvidePlugin({
+          $: "jquery",
+          jQuery: "jquery"
+        }),
         new UglifyJsPlugin(),
         new MiniCssExtractPlugin({
           filename: "[name].[hash].css",

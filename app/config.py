@@ -7,7 +7,7 @@ class Config(object):
     ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'png', 'gif'])
     SECRET_KEY = 'super_secret_key'
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
-    WEBPACK_MANIFEST_PATH = './build/manifest.json'
+    WEBPACK_MANIFEST_PATH = '../build/manifest.json'
 
 class DevelopmentConfig(Config):
     DEBUG = True

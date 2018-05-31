@@ -11,20 +11,21 @@ module.exports = (env, options) => {
     return {
       entry: {
           app: [
-            path.resolve(__dirname, 'app/templates/app.js')
+            path.resolve(__dirname, './app/templates/app.js')
           ],
           venders: [
-            path.resolve(__dirname, 'node_modules/bootstrap/dist/css/bootstrap.min.css')
+            path.resolve(__dirname, './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'),
+            path.resolve(__dirname, './node_modules/bootstrap/dist/css/bootstrap.min.css')
           ],
       },
       output: {
-        path: path.resolve(__dirname, './app/build/public'),
+        path: path.resolve(__dirname, './build/public'),
           publicPath: 'http://localhost:2992/assets/',
           filename: '[name].[chunkhash].js',
           chunkFilename: '[id].[chunkhash].js'
       },
       resolve: {
-          extensions: ['.js', '.css']
+        extensions: ['.js', '.css']
       },
       module: {
           rules: [
@@ -46,8 +47,19 @@ module.exports = (env, options) => {
               {
                 test: /\.(jpe?g|png|gif|svg([\?]?.*))$/i,
                 use: [
-                  `file?context=${rootAssetPath}&name=[path][name].[hash].[ext]`,
-                  'image?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                  {
+                    loader: 'file-loader',
+                    options: {
+                      name (file) {
+                        if (env === 'development') {
+                          return '[path][name].[ext]'
+                        }
+
+                        return '[hash].[ext]'
+                      },
+                      outputPath: rootAssetPath + '/images'
+                    }
+                  }
                 ]
               }
           ]
@@ -58,8 +70,8 @@ module.exports = (env, options) => {
           filename: "[name].[hash].css",
           chunkFilename: "[id].[hash].css"
         }),
-        new ManifestRevisionPlugin(path.join('./app/build', 'manifest.json'), {
-          rootAssetPath: './app/static'
+        new ManifestRevisionPlugin(path.join('build', 'manifest.json'), {
+          rootAssetPath: rootAssetPath
         })
       ]
   }

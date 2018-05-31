@@ -41,6 +41,7 @@ class Category {
 // ViewModel
 const CategoryList = function(categories, delegate) {
   this.delegate = delegate
+  this.confirmDeleteModal = $('#confirmDeleteModal')
 
 
   // state
@@ -208,6 +209,11 @@ const CategoryList = function(categories, delegate) {
 
     }
   }
+
+  this.toggleModal = function() {
+    this.confirmDeleteModal.modal('toggle')
+
+  }.bind(this)
 
   this.deleteCategory = function(id, context, event) {
     // handle event object

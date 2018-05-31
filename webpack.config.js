@@ -14,7 +14,7 @@ module.exports = (env, options) => {
             path.resolve(__dirname, './app/templates/app.js')
           ],
           venders: [
-            path.resolve(__dirname, './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'),
+            path.resolve(__dirname, './node_modules/bootstrap/dist/js/bootstrap.min.js'),
             path.resolve(__dirname, './node_modules/bootstrap/dist/css/bootstrap.min.css')
           ],
       },

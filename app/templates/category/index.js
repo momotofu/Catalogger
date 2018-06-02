@@ -215,12 +215,13 @@ const CategoryList = function(categories, delegate) {
 
   }.bind(this)
 
-  this.deleteCategory = function(id, context, event) {
-    // handle event object
-    this.inputClicked(context, event)
+  this.deleteCategory = function(event) {
+    const id = this.activeCategoryId()
+    const category = this.getCategory(id)
 
     // delete category object from DOM
-    this.categories.remove(context)
+    this.categories.remove(category)
+    this.confirmDeleteModal.modal('hide')
 
     // remove category from server
     $.post({

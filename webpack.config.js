@@ -25,10 +25,7 @@ module.exports = (env, options) => {
           chunkFilename: '[id].[chunkhash].js'
       },
       resolve: {
-        extensions: ['.js', '.css'],
-        alias: {
-          'ko': path.resolve(__dirname, './node_modules/build/output/knockout-latest.js')
-        }
+        extensions: ['.js', '.css']
       },
       module: {
           rules: [
@@ -68,10 +65,6 @@ module.exports = (env, options) => {
           ]
       },
       plugins: [
-        new webpack.ProvidePlugin({
-          $: "jquery",
-          jQuery: "jquery"
-        }),
         new UglifyJsPlugin(),
         new MiniCssExtractPlugin({
           filename: "[name].[hash].css",

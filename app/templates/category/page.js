@@ -90,6 +90,15 @@ const Page = function() {
     window.location.href = `${baseURL}/category/${id}/items/new`
   }.bind(this)
 
+  this.editButtonClick = function(context, event) {
+    console.log(context, event)
+
+  }
+
+  this.deleteButtonClick = function(context, event) {
+
+  }
+
 }
 
 export default Page

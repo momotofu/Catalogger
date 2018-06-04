@@ -130,10 +130,14 @@
             <h5 class="card-title" data-bind="text: name"></h5>
             <p class="card-text" data-bind="text: details"></p>
             <div class="btn-group btn-group-sm item-card__controls">
-              <a class="card-link btn btn-outline-secondary">
+              <a
+                class="card-link btn btn-outline-secondary"
+                data-bind="click: editButtonClick">
                 edit
               </a>
-              <a class="card-link btn btn-outline-secondary">
+              <a
+                class="card-link btn btn-outline-secondary"
+                data-bind="click: deletButtonClick">
                 delete
               </a>
             </div>

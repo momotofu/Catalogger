@@ -82,7 +82,7 @@ class Item(Base):
             'details' : self.details,
             'rating' : self.rating,
             'user_id' : self.user_id,
-            'categories' : [category.id for category in self.item_children]
+            'categories_ids' : [category.id for category in self.item_children]
         }
 
 

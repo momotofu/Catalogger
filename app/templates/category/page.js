@@ -91,14 +91,14 @@ const Page = function() {
   }.bind(this)
 
   this.sendToEditItem = function(context, event) {
-    console.log('context: ', context)
     event.preventDefault()
     event.stopPropagation()
 
+    const categoryId = context.categories_ids[0]
     const id = context.id
     const baseURL = getBaseURLFrom(window.location.href)
 
-    // window.location.href = `${baseURL}/category/${id}/items/${id}/edit`
+    window.location.href = `${baseURL}/category/${categoryId}/items/${id}/edit`
   }
 
   this.deleteButtonClick = function(context, event) {

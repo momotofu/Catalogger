@@ -90,9 +90,15 @@ const Page = function() {
     window.location.href = `${baseURL}/category/${id}/items/new`
   }.bind(this)
 
-  this.editButtonClick = function(context, event) {
-    console.log(context, event)
+  this.sendToEditItem = function(context, event) {
+    console.log('context: ', context)
+    event.preventDefault()
+    event.stopPropagation()
 
+    const id = context.id
+    const baseURL = getBaseURLFrom(window.location.href)
+
+    // window.location.href = `${baseURL}/category/${id}/items/${id}/edit`
   }
 
   this.deleteButtonClick = function(context, event) {

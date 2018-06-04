@@ -81,7 +81,8 @@ class Item(Base):
             'image_name' : self.image_name,
             'details' : self.details,
             'rating' : self.rating,
-            'user_id' : self.user_id
+            'user_id' : self.user_id,
+            'categories' : [category.id for category in self.item_children]
         }
 
 

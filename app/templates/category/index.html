@@ -132,12 +132,12 @@
             <div class="btn-group btn-group-sm item-card__controls">
               <a
                 class="card-link btn btn-outline-secondary"
-                data-bind="click: editButtonClick">
+                data-bind="click: $parent.sendToEditItem.bind(this)">
                 edit
               </a>
               <a
                 class="card-link btn btn-outline-secondary"
-                data-bind="click: deletButtonClick">
+                data-bind="click: $parent.deletButtonClick">
                 delete
               </a>
             </div>

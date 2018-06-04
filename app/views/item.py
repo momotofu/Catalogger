@@ -32,6 +32,7 @@ def getItems(category_id):
 
 @item.route('/category/<int:category_id>/items/new', methods=['GET', 'POST'])
 def createItem(category_id):
+    # grab a reference to the category model
     category = session.query(Category).filter(Category.id == category_id).one()
     if request.method == 'GET':
         try:
@@ -45,9 +46,7 @@ def createItem(category_id):
             params = request.form
 
             # create an item object from form params
-            item = Item(
-                type=category.name,
-                name=params['name'],
+            item = Item( type=category.name, name=params['name'],
                 details=params['details'])
 
             if 'image' in request.files.keys():
@@ -77,4 +76,47 @@ def createItem(category_id):
             raise
 
 
+@item.route('/category/<int:category_id>/items/<int:item_id>/edit',
+methods=['GET', 'POST'])
+def editItem(category_id, item_id):
+    # grab a reference to the category and item models
+    category = session.query(Category).filter(Category.id == category_id).one()
+    item = session.query(Item).filter(Item.id == item_id).one()
+
+    if request.method == 'GET':
+        # serve up edit form
+        return render_template('item/edit.html', item=item, category=category)
+
+    if request.method == 'POST':
+        try:
+            params = request.form
+
+            # update item model from form params
+            item = Item( type=category.name, name=params['name'],
+                details=params['details'])
+            item.name = params.name if len(params.name) > 0 else item.name
+            item.details = params.details if len(params.details) > 0 else item.details
+
+            if 'image' in request.files.keys():
+                image = request.files['image']
+
+            # save image asset and set image_name property for the item
+            if image and image.filename != item.image_name and allowed_file(image.filename, app.config):
+                image_name = (get_rand_string() + '.').join([str(x) for x in secure_filename(image.filename).split('.')])
+                path = os.path.join(app.config['IMAGE_FOLDER'], image_name)
+                image.save(path)
+                item.image_name = image_name
+
+            # update item in the database
+            session.add(item)
+            session.commit()
+
+            # send feedback to the user
+            flash("%s updated!" % item.name)
+
+            return redirect(url_for("category.allCategories"))
+
+        except:
+            session.rollback()
+            raise
 

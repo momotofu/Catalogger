@@ -117,3 +117,23 @@ def editItem(category_id, item_id):
             session.rollback()
             raise
 
+
+@item.route('/category/<int:category_id>/items/<int:item_id>/delete',
+methods=['POST'])
+def deleteItem():
+    item = session.query(Item).filter(Item.id == item_id).one()
+
+    try:
+        # delete item from the database
+        session.delete(item)
+        session.commit()
+
+        # send feedback to the user
+        flash("Successfuly deleted %s" % item.name)
+
+        return redirect(url_for("category.allCategories"))
+
+    except:
+        session.rollback()
+        raise
+

@@ -112,7 +112,7 @@ ul {
 
 .category-list__group {
   width: 100%;
-  height: calc(100% - 54px);
+  /*height: calc(100% - 54px);*/
   min-height: 148px;
   background-color: lightgray;
   border-radius: 3px;

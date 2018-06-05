@@ -122,8 +122,9 @@ const Page = function() {
     $.post({
       url : url,
       success: function(data) {
+        const json = JSON.parse(data)
         // success message
-        console.log(`Successfuly deleted ${data.name}" item on the server.`)
+        console.log(`Successfuly deleted ${json.name} item on the server.`)
       }
     })
 

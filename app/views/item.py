@@ -120,7 +120,7 @@ def editItem(category_id, item_id):
 
 @item.route('/category/<int:category_id>/items/<int:item_id>/delete',
 methods=['POST'])
-def deleteItem():
+def deleteItem(category_id, item_id):
     # grab a reference to the category and item models
     item = session.query(Item).filter(Item.id == item_id).one()
     category = session.query(Category).filter(Category.id == category_id).one()
@@ -137,9 +137,9 @@ def deleteItem():
         session.commit()
 
         # send feedback to the user
-        flash("Successfuly deleted %s from %s" % item.name, category.name)
+        flash("Successfuly deleted %s from %s" % (item.name, category.name))
 
-        return redirect(url_for("category.allCategories"))
+        return json.dumps({'name':item.name, 'success':True}), 200, {'ContentType':'application/json'}
 
     except:
         session.rollback()

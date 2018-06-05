@@ -124,7 +124,7 @@ const Page = function() {
       success: function(data) {
         const json = JSON.parse(data)
         // success message
-        console.log(`Successfuly deleted ${json.name} item on the server.`)
+        console.log(`Successfuly deleted "${json.name}" item on the server.`)
       }
     })
 

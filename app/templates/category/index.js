@@ -231,7 +231,7 @@ const CategoryList = function(categories, delegate) {
       },
       success: function(data) {
         // success message
-        console.log(`Successfuly deleted ${data.name}" category on the server.`)
+        console.log(`Successfuly deleted "${data.name}" category on the server.`)
       },
       dataType: 'json'
     })

@@ -18,6 +18,7 @@ const Page = function() {
 
   // state
   this.activeCategory = ko.observable(null)
+  this.activeItem = {}
   this.isEditing = ko.observable(false)
   this.items = ko.observableArray()
   this.activeCategoryName = ko.computed(function() {
@@ -27,6 +28,9 @@ const Page = function() {
       return 'Item'
     }
   }, this)
+
+  // constants
+  this.confirmDeleteModal = $('#confirmItemDeleteModal')
 
 
   /**
@@ -101,9 +105,38 @@ const Page = function() {
     window.location.href = `${baseURL}/category/${categoryId}/items/${id}/edit`
   }
 
-  this.deleteButtonClick = function(context, event) {
+  this.deleteItem = function(context, event) {
+    // delete item object from DOM
+    this.items.remove(context)
+    this.confirmDeleteModal.modal('hide')
+
+    // set up url
+    const categoryId = context.categories_ids[0]
+    const id = context.id
+    const baseURL = getBaseURLFrom(window.location.href)
+    const url =`${baseURL}/category/${categoryId}/items/${id}/delete`
+
+    // remove category from server. This removes the item from the category. If
+    // the item has no more categories, then it will be deleted.
+    $.post({
+      url : url,
+      success: function(data) {
+        // success message
+        console.log(`Successfuly deleted ${data.name}" item on the server.`)
+      }
+    })
 
   }
+
+  this.toggleModal = function(context, event) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    // set active item to be referenced by the deleteItem function
+    this.activeItem = context
+    this.confirmDeleteModal.modal('toggle')
+
+  }.bind(this)
 
 }
 

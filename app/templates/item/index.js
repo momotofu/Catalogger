@@ -1,4 +1,4 @@
-const CreateItemViewModel = function() {
+const ItemViewModel = function() {
   // constants
   this.imageInput = $('#image-input')
   this.imagePreview = $('#image-upload-preview')
@@ -31,4 +31,4 @@ const CreateItemViewModel = function() {
 
 }
 
-export default CreateItemViewModel
+export default ItemViewModel

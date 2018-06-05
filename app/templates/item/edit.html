@@ -14,7 +14,9 @@
           <div
             class="col-12 mb-3 image-upload-preview"
             id="image-upload-preview"
-            style="background-image: url({{ url_for('api.image_file', filename=item.image_name) }})"
+            style="background-image: url({{ url_for('api.image_file',
+            filename=item.image_name) }}); background-position: center;
+            background-size: cover"
             data-bind="click: openFileChooser">
           </div>
           <input

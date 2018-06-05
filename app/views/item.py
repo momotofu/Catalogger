@@ -92,13 +92,10 @@ def editItem(category_id, item_id):
             params = request.form
 
             # update item model from form params
-            item = Item( type=category.name, name=params['name'],
-                details=params['details'])
-            item.name = params.name if len(params.name) > 0 else item.name
-            item.details = params.details if len(params.details) > 0 else item.details
+            item.name = params['name'] if len(params['name']) > 0 else item.name
+            item.details = params['details'] if len(params['details']) > 0 else item.details
 
-            if 'image' in request.files.keys():
-                image = request.files['image']
+            image = request.files['image'] if 'image' in request.files.keys() else None
 
             # save image asset and set image_name property for the item
             if image and image.filename != item.image_name and allowed_file(image.filename, app.config):

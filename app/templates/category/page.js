@@ -105,14 +105,15 @@ const Page = function() {
     window.location.href = `${baseURL}/category/${categoryId}/items/${id}/edit`
   }
 
-  this.deleteItem = function(context, event) {
+  this.deleteItem = function() {
     // delete item object from DOM
-    this.items.remove(context)
+    const item = this.activeItem
+    this.items.remove(item)
     this.confirmDeleteModal.modal('hide')
 
     // set up url
-    const categoryId = context.categories_ids[0]
-    const id = context.id
+    const categoryId = item.categories_ids[0]
+    const id = item.id
     const baseURL = getBaseURLFrom(window.location.href)
     const url =`${baseURL}/category/${categoryId}/items/${id}/delete`
 
@@ -126,7 +127,7 @@ const Page = function() {
       }
     })
 
-  }
+  }.bind(this)
 
   this.toggleModal = function(context, event) {
     event.preventDefault()

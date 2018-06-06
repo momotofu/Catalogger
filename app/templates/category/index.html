@@ -10,7 +10,7 @@
         type="button"
         class="btn"
         data-bind="css: isEditing() ? 'btn-outline-success' : 'btn-secondary',
-        click: onEditButtonClick">
+        click: onEditButtonClick, attr: { disabled : canEdit() }">
         <!-- ko ifnot: isEditing -->
           Edit
         <!-- /ko -->

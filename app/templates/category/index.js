@@ -99,6 +99,15 @@ const CategoryList = function(categories, delegate) {
     this.categories = ko.observableArray([])
   }
 
+  this.canEdit = ko.computed(() => {
+    const canEdit = this.categories().length > 0
+    if (!canEdit && this.isEditing()) {
+      this.setIsEditing()
+    }
+
+    return !canEdit
+  }, this)
+
 
   // methods
   this.categoryEdited = function(context, event) {
@@ -155,7 +164,6 @@ const CategoryList = function(categories, delegate) {
   }.bind(this)
 
   this.setFirstCategoryBorderRadius = function() {
-    console.log('called')
     // change first list item border-radius
     const firstCategory = document.getElementById('category-list').children[1]
 

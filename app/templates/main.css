@@ -84,6 +84,10 @@ ul {
   outline: none;
 }
 
+.btn:disabled {
+  cursor: not-allowed;
+}
+
 .btn-cancel {
   margin: 0 22px;
 }

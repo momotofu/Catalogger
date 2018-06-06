@@ -7,6 +7,7 @@ Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
+
 try:
     """
     """
@@ -59,11 +60,11 @@ try:
     author = session.query(Author).filter(Author.firstname == 'Tara').one()
     session.delete(author)
     session.commit()
-    """
 
     book = session.query(Book).filter(Book.rating == '4.5').one()
     session.delete(book)
     session.commit()
+    """
 
 
 

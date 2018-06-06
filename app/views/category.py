@@ -1,4 +1,4 @@
-from app.model import Category
+from app.model import Category, Item
 from app.utils.utils import get_session
 from flask import Blueprint, render_template, request
 import json
@@ -33,8 +33,7 @@ def newCategory():
         category = Category(
             name=name,
             type=name,
-            depth=0,
-            ParentID=0)
+            depth=0)
     else:
         return
 
@@ -55,11 +54,23 @@ def newCategory():
 @category.route('/categories/<int:category_id>/delete', methods=['POST'])
 def deleteCategory(category_id):
     try:
+        # delete the category
         category = session.query(Category).filter(Category.id == category_id).one()
         session.delete(category)
         session.commit()
 
-        return json.dumps({'name': category.name, 'success':True}), 200, {'ContentType':'application/json'}
+        # delete the category from items
+        items = (
+            session.query(Item)
+                .join(Item.item_children)
+                .filter(Category.id == category_id)
+                .all()
+        )
+
+
+        # if items have no categories then remove them
+
+        return json.dumps({'name': category.name, 'success':True}), 200, {'Conten Type':'application/json'}
 
     except:
         session.rollback()

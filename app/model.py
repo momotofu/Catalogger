@@ -4,7 +4,18 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
 
+from sqlalchemy import event
+from sqlalchemy.engine import Engine
+from sqlite3 import Connection as SQLite3Connection
+
 Base = declarative_base()
+
+@event.listens_for(Engine, "connect")
+def _set_sqlite_pragma(dbapi_connection, connection_record):
+    if isinstance(dbapi_connection, SQLite3Connection):
+        cursor = dbapi_connection.cursor()
+        cursor.execute("PRAGMA foreign_keys=ON;")
+        cursor.close()
 
 
 class User(Base):
@@ -32,8 +43,7 @@ class Category(Base):
     type = Column(String(80), nullable=False)
     ParentID = Column(Integer,
         ForeignKey('category.id',
-        ondelete='CASCADE'),
-        nullable=False)
+        ondelete='CASCADE'))
 
     # relationships
     Children = relationship('Category',
@@ -116,8 +126,8 @@ class Books_And_Authors(Base):
     __tablename__ = 'books_and_authors'
 
     # attributes
-    book_id = Column(ForeignKey('book.id'), primary_key=True)
-    author_id = Column(ForeignKey('author.id'), primary_key=True)
+    book_id = Column(ForeignKey('book.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
+    author_id = Column(ForeignKey('author.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
 
     # relationships
     book = relationship('Book')
@@ -128,13 +138,12 @@ class Items_And_Categories(Base):
     __tablename__ = 'items_and_categories'
 
     # attributes
-    category_id = Column(ForeignKey('category.id'), primary_key=True)
-    item_id = Column(ForeignKey('item.id'), primary_key=True)
+    category_id = Column(ForeignKey('category.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
+    item_id = Column(ForeignKey('item.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
 
     # relationships
     item = relationship('Item')
     category = relationship('Category')
-
 
 
 engine = create_engine('sqlite:///catalog.db')

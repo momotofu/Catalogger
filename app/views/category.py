@@ -5,8 +5,6 @@ from flask import current_app as app
 
 import json, os
 
-# from pdb import set_trace as bp
-
 session = get_session('sqlite:///catalog.db')
 category = Blueprint('category',
                         __name__,
@@ -67,7 +65,6 @@ def deleteCategory(category_id):
         )
 
         session.delete(category)
-        # bp()
 
         # if items have no categories then remove them
         for item in items:

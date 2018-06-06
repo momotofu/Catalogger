@@ -1,7 +1,11 @@
 from app.model import Category, Item
 from app.utils.utils import get_session
 from flask import Blueprint, render_template, request
-import json
+from flask import current_app as app
+
+import json, os
+
+# from pdb import set_trace as bp
 
 session = get_session('sqlite:///catalog.db')
 category = Blueprint('category',
@@ -54,12 +58,7 @@ def newCategory():
 @category.route('/categories/<int:category_id>/delete', methods=['POST'])
 def deleteCategory(category_id):
     try:
-        # delete the category
         category = session.query(Category).filter(Category.id == category_id).one()
-        session.delete(category)
-        session.commit()
-
-        # delete the category from items
         items = (
             session.query(Item)
                 .join(Item.item_children)
@@ -67,8 +66,18 @@ def deleteCategory(category_id):
                 .all()
         )
 
+        session.delete(category)
+        # bp()
 
         # if items have no categories then remove them
+        for item in items:
+            print('children len: ', item.item_children, len(item.item_children))
+            if len(item.item_children) == 0:
+                os.remove(os.path.join(app.config['IMAGE_FOLDER'], item.image_name))
+                session.delete(item)
+
+        # commit changes to the database
+        session.commit()
 
         return json.dumps({'name': category.name, 'success':True}), 200, {'Conten Type':'application/json'}
 

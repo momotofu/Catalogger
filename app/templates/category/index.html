@@ -60,7 +60,9 @@
               <input
                 type="text"
                 class="form-control"
-                data-bind="event: { focusout: $parent.categoryEdited }, click: $parent.inputClicked, attr: { placeholder: name }">
+                data-bind="event: { focusout: $parent.categoryEdited }, click:
+                $parent.inputClicked, attr: { placeholder: name }, enterKey:
+                $parent.categoryEditedEnterKeyHandler">
               <div class="input-group-append">
                 <a
                   href="#"

@@ -110,6 +110,12 @@ const CategoryList = function(categories, delegate) {
 
 
   // methods
+  this.categoryEditedEnterKeyHandler = function(context, event) {
+    this.categoryEdited(context, event)
+    this.onEditButtonClick()
+
+  }.bind(this)
+
   this.categoryEdited = function(context, event) {
     // update DOM
     if (event.target.value.length > 0 && event.target.placeholder != event.target.value) {

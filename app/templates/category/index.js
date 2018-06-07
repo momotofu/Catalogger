@@ -83,7 +83,6 @@ const CategoryList = function(categories, delegate) {
   }.bind(this)
 
   this.setActiveCategoryId = function(id) {
-    console.log('active id: ', id)
     this.activeCategoryId(id)
 
     const category = this.getCategory(id)

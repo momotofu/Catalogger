@@ -99,6 +99,7 @@ const CategoryList = function(categories, delegate) {
     this.categories = ko.observableArray([])
   }
 
+  // this state is down here because its dependent on this.categories
   this.canEdit = ko.computed(() => {
     const canEdit = this.categories().length > 0
     if (!canEdit && this.isEditing()) {
@@ -236,6 +237,10 @@ const CategoryList = function(categories, delegate) {
     // delete category object from DOM
     this.categories.remove(category)
     this.confirmDeleteModal.modal('hide')
+
+    // update activeCategoryId
+    //const newActiveCategoryId = this.categories.length > 0 ? this.categories()[0].id : -1
+    //this.setActiveCategoryId(newActiveCategoryId)
 
     // remove category from server
     $.post({

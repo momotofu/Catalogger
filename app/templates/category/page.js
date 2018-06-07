@@ -21,6 +21,10 @@ const Page = function() {
   this.activeItem = {}
   this.isEditing = ko.observable(false)
   this.items = ko.observableArray()
+  this.canCreateItem = ko.computed(() => {
+    console.log('debug: ', this.activeCategory())
+    return !!this.activeCategory()
+  })
   this.activeCategoryName = ko.computed(function() {
     if (this.activeCategory()) {
       return this.activeCategory().name
@@ -39,6 +43,7 @@ const Page = function() {
   this.setActiveCategory = function(category) {
     this.activeCategory(category)
     this.getItemsForActiveCategory()
+
   }.bind(this)
 
   this.setIsEditing = function(isEditing) {

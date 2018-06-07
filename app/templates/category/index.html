@@ -115,7 +115,7 @@
       <button
         type="button"
         class="btn btn-outline-success mb-3"
-        data-bind="click: sendToCreateItem">
+        data-bind="click: sendToCreateItem, attr: { disabled: canCreateItem() }">
           New item
       </button>
     </div>

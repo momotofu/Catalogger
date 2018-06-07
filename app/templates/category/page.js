@@ -23,7 +23,7 @@ const Page = function() {
   this.items = ko.observableArray()
   this.canCreateItem = ko.computed(() => {
     console.log('canCreateItem: ', this.activeCategory())
-    return !!this.activeCategory()
+    return !this.activeCategory()
   })
   this.activeCategoryName = ko.computed(function() {
     if (this.activeCategory()) {
@@ -56,6 +56,7 @@ const Page = function() {
 
   // getters
   this.getItemsForActiveCategory = function() {
+    if (!this.activeCategory()) return
     // setup get URL
     const id = this.activeCategory().id
     const baseURL = getBaseURLFrom(window.location.href)

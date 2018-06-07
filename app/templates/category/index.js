@@ -83,10 +83,9 @@ const CategoryList = function(categories, delegate) {
   }.bind(this)
 
   this.setActiveCategoryId = function(id) {
-    this.activeCategoryId(id)
-
-    const category = this.getCategory(id)
-    if (category !== undefined) this.delegate.setActiveCategory(category)
+      const category = this.getCategory(id)
+      this.delegate.setActiveCategory(category)
+      this.activeCategoryId(id)
 
   }.bind(this)
 
@@ -222,6 +221,7 @@ const CategoryList = function(categories, delegate) {
 
         // update the dummy category object with real data
         for (let key in data) category[key] = data[key]
+        this.setActiveCategoryId(data['id'])
 
         this.setFirstCategoryBorderRadius()
       }
@@ -239,12 +239,9 @@ const CategoryList = function(categories, delegate) {
     const category = this.getCategory(id)
 
     // delete category object from DOM
+    this.setActiveCategoryId(-1)
     this.categories.remove(category)
     this.confirmDeleteModal.modal('hide')
-
-    // update activeCategoryId
-    //const newActiveCategoryId = this.categories.length > 0 ? this.categories()[0].id : -1
-    //this.setActiveCategoryId(newActiveCategoryId)
 
     // remove category from server
     $.post({
@@ -267,6 +264,13 @@ const CategoryList = function(categories, delegate) {
     event.preventDefault()
     event.stopPropagation()
   }
+
+  // setup subscriptions
+  this.activeCategoryId.subscribe(function(newValue) {
+    console.log('active id set: ', newValue)
+    const category = this.getCategory(newValue)
+    this.delegate.setActiveCategory(category)
+  }, this)
 
 }
 

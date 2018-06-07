@@ -83,8 +83,12 @@ const CategoryList = function(categories, delegate) {
   }.bind(this)
 
   this.setActiveCategoryId = function(id) {
+    console.log('active id: ', id)
     this.activeCategoryId(id)
-    this.delegate.setActiveCategory(this.getCategory(id))
+
+    const category = this.getCategory(id)
+    if (category !== undefined) this.delegate.setActiveCategory(category)
+
   }.bind(this)
 
 
@@ -193,6 +197,7 @@ const CategoryList = function(categories, delegate) {
     if (name.length > 0) {
       // create a new dummy category and get a reference to its id
       const category = new Category({ name }, true)
+      this.setActiveCategoryId(category.id)
 
       // update the DOM
       this.categories.unshift(category)

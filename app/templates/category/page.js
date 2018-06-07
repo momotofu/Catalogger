@@ -22,7 +22,6 @@ const Page = function() {
   this.isEditing = ko.observable(false)
   this.items = ko.observableArray()
   this.canCreateItem = ko.computed(() => {
-    console.log('debug: ', this.activeCategory())
     return !!this.activeCategory()
   })
   this.activeCategoryName = ko.computed(function() {

@@ -56,7 +56,12 @@ const Page = function() {
 
   // getters
   this.getItemsForActiveCategory = function() {
-    if (!this.activeCategory()) return
+    // reset items collection if no category is selected
+    if (!this.activeCategory()) {
+      this.items([])
+      return
+    }
+
     // setup get URL
     const id = this.activeCategory().id
     const baseURL = getBaseURLFrom(window.location.href)

@@ -1,0 +1,22 @@
+.nav-link__label--expand-left {
+  transition: all 0.1s;
+}
+
+.nav-link__label--expand-left:hover {
+  padding-left: 3px;
+  animation: none;
+}
+
+.link__icon:hover .fa-trash-alt {
+  animation: wiggle 0.3s infinite;
+  color: #f44336;
+}
+
+/*animations*/
+@keyframes wiggle {
+    0% { transform: translateX(0px) }
+    25% { transform: translateX(-2px) }
+    50% { transform: translateX(0px) }
+    75% { transform: translateX(2px); }
+    100% { transform: translateX(0px); }
+}

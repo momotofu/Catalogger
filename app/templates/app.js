@@ -7,6 +7,10 @@ import ItemViewModel from './item'
 import * as $ from 'jquery'
 import 'bootstrap'
 import * as ko from 'knockout'
+import '@fortawesome/fontawesome'
+import '@fortawesome/fontawesome-free-brands'
+import '@fortawesome/fontawesome-free-regular'
+import '@fortawesome/fontawesome-free-solid'
 
 // import CSS
 import './main.css'

@@ -15,8 +15,7 @@ module.exports = (env, options) => {
             path.resolve(__dirname, './app/templates/app.js')
           ],
           vender_css: [
-            path.resolve(__dirname, './node_modules/bootstrap/dist/css/bootstrap.min.css'),
-            path.resolve(__dirname, './node_modules/font-awesome/css/font-awesome.css')
+            path.resolve(__dirname, './node_modules/bootstrap/dist/css/bootstrap.min.css')
           ]
       },
       output: {

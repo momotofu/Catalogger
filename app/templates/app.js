@@ -6,7 +6,6 @@ import ItemViewModel from './item'
 // import vendor js
 import * as $ from 'jquery'
 import 'bootstrap'
-import 'font-awesome/css/font-awesome.css'
 import * as ko from 'knockout'
 
 // import CSS

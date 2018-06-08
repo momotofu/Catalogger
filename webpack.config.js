@@ -15,17 +15,21 @@ module.exports = (env, options) => {
             path.resolve(__dirname, './app/templates/app.js')
           ],
           vender_css: [
-            path.resolve(__dirname, './node_modules/bootstrap/dist/css/bootstrap.min.css')
+            path.resolve(__dirname, './node_modules/bootstrap/dist/css/bootstrap.min.css'),
+            path.resolve(__dirname, './node_modules/font-awesome/css/font-awesome.css')
           ]
       },
       output: {
         path: path.resolve(__dirname, './build/public'),
-          publicPath: 'http://localhost:2992/assets/',
-          filename: '[name].[chunkhash].js',
-          chunkFilename: '[id].[chunkhash].js'
+        publicPath: 'http://localhost:2992/assets/',
+        filename: '[name].[chunkhash].js',
+        chunkFilename: '[id].[chunkhash].js'
       },
       resolve: {
         extensions: ['.js', '.css']
+      },
+      devServer: {
+       headers: { "Access-Control-Allow-Origin": "*" }
       },
       module: {
           rules: [

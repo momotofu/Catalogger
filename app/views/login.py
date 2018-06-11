@@ -1,4 +1,3 @@
-
 from flask import Blueprint, render_template
 from app.utils.utils import get_session, get_rand_string
 
@@ -17,7 +16,7 @@ def user_login():
     2. Render user login page.
     """
 
-    state = utils.get_rand_string()
+    state = get_rand_string()
     login_session['state'] = state
 
     return render_template('login/login.html', state=state)

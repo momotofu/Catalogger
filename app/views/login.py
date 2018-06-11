@@ -1,10 +1,17 @@
 from flask import Blueprint, render_template
+from flask.ext.login import LoginManager
 from app.utils.utils import get_session, get_rand_string
 
 session = get_session('sqlite:///catalog.db')
 login = Blueprint('login',
                         __name__,
                         template_folder='templates')
+
+login_manager = LoginManager()
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 
 @login.route('/login')

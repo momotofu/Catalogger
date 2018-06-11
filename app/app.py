@@ -4,13 +4,12 @@ from flask_webpack import Webpack
 from flask_login import LoginManager
 
 
-def create_app(app_name, config=None):
+def create_app(config=None):
     """
     Configure app object blueprints and global variables.
     """
 
     app = configure_app(Flask(__name__), config)
-    configure_blueprints(app)
 
     # setup webpack for assets
     webpack = Webpack()
@@ -19,6 +18,9 @@ def create_app(app_name, config=None):
     # setup flask-login
     login_manager = LoginManager()
     login_manager.init_app(app)
+
+    # setup flask blueprints
+    configure_blueprints(app)
 
     return app
 

@@ -3,12 +3,13 @@ from sqlalchemy import UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
-
 from sqlalchemy import event
 from sqlalchemy.engine import Engine
+
 from sqlite3 import Connection as SQLite3Connection
 
 Base = declarative_base()
+
 
 @event.listens_for(Engine, "connect")
 def _set_sqlite_pragma(dbapi_connection, connection_record):
@@ -29,6 +30,22 @@ class User(Base):
     picture = Column(String(80))
     username = Column(String(80))
     password_hash = Column(String(64))
+
+    def is_active(self):
+        """True, as all users are active."""
+        return True
+
+    def get_id(self):
+        """Return the email address to satisfy Flask-Login's requirements."""
+        return self.email
+
+    def is_authenticated(self):
+        """Return True if the user is authenticated."""
+        return self.authenticated
+
+    def is_anonymous(self):
+        """False, as anonymous users aren't supported."""
+        return False
 
 
 class Category(Base):

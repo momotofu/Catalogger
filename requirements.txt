@@ -7,3 +7,4 @@ flask_httpauth >= v3.2.3
 passlib >= 1.7.1
 itsdangerous >= 0.24
 Flask-Webpack == 0.1.0
+flask-login >= 0.4.1

@@ -7,11 +7,16 @@
 {% block mainContent %}
 <div class="row justify-content-center">
   <div class="col-lg-4">
-    <h5 class="text-muted text-center mb-3" >login</h5>
+    <h5 class="text-muted text-center mb-3" >
+      {% for message in form.errors %}
+        {{ message }}
+      {% endfor %}
+    </h5>
     <div class="card mb-4">
       <form class="card-body card-body-form" enctype=multipart/form-data method="POST">
+        {{ form.hidden_tag() }}
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="email">
+          {{ form.email(class_="form-control") }}
           <div class="input-group-append">
             <span class="input-group-text">
               email
@@ -19,7 +24,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="name">
+          {{ form.password(class_="form-control") }}
           <div class="input-group-append">
             <span class="input-group-text">
               Password

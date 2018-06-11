@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, redirect
+from flask import url_for, flash
 from flask_login import LoginManager
+from .forms import LoginForm
 from app.model import User
 from app.utils.utils import get_session, get_rand_string
 
@@ -20,6 +22,15 @@ def load_user(user_id):
         return None
 
 
-@login.route('/login')
+@login.route('/login', methods=['POST', 'GET'])
 def user_login():
-    return render_template('login/login.html')
+    form = LoginForm()
+
+    if request.method == 'POST':
+        if form.validate() == False:
+            flash('All fields are required')
+            return render_template('login/login.html', form=form)
+        else:
+            return redirect(url_for('category.allCategories'))
+    else:
+        return render_template('login/login.html', form=form)

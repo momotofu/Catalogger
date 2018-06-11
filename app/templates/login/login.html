@@ -6,22 +6,20 @@
 {% endblock %}
 {% block mainContent %}
 <div class="row justify-content-center">
-  <div class="col-lg-6">
+  <div class="col-lg-4">
     <h5 class="text-muted text-center mb-3" >login</h5>
     <div class="card mb-4">
-      <form class="card-body card-body-form" action={{ }} enctype=multipart/form-data method="POST">
+      <form class="card-body card-body-form" enctype=multipart/form-data method="POST">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="name" value="{{
-          item.name }}">
+          <input type="text" class="form-control" name="email">
           <div class="input-group-append">
             <span class="input-group-text">
-              Name
+              email
             </span>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="name" value="{{
-          item.name }}">
+          <input type="text" class="form-control" name="name">
           <div class="input-group-append">
             <span class="input-group-text">
               Password
@@ -31,7 +29,7 @@
         <input
           class="btn btn-primary btn-lg btn-block"
           type="submit"
-          value="UPDATE">
+          value="LOGIN">
       </form>
     </div>
     <a class="btn btn-outline-secondary btn-cancel btn-lg d-block mb-5" href={{ url_for('category.allCategories') }}>

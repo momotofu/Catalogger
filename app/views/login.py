@@ -22,14 +22,4 @@ def load_user(user_id):
 
 @login.route('/login')
 def user_login():
-    """
-    1. Create a state token to prevent request forgery
-    and store it in the session for later validation.
-
-    2. Render user login page.
-    """
-
-    state = get_rand_string()
-    login_session['state'] = state
-
-    return render_template('login/login.html', state=state)
+    return render_template('login/login.html')

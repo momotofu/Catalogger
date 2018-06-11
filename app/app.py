@@ -1,6 +1,7 @@
 from flask import Flask
 from app.config import Config as default_config
 from flask_webpack import Webpack
+from flask_login import LoginManager
 
 
 def create_app(app_name, config=None):
@@ -14,6 +15,10 @@ def create_app(app_name, config=None):
     # setup webpack for assets
     webpack = Webpack()
     webpack.init_app(app)
+
+    # setup flask-login
+    login_manager = LoginManager()
+    login_manager.init_app(app)
 
     return app
 

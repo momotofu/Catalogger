@@ -3,6 +3,9 @@ import CategoryList from './category'
 import Page from './category/page'
 import ItemViewModel from './item'
 
+// set up utilities for cetogories page
+import * as categoryPageUtils from './category/utils'
+
 // import vendor js
 import * as $ from 'jquery'
 import 'bootstrap'
@@ -17,6 +20,7 @@ import './main.css'
 
 // expose modules to global scope
 window.CategoryList = CategoryList
+window.categoryPageUtils = categoryPageUtils
 window.Page = Page
 window.ItemViewModel = ItemViewModel
 

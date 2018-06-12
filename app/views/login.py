@@ -18,6 +18,11 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
+@login.route('/signup', methods=['POST', 'GET'])
+def user_signup():
+    pass
+
+
 @login.route('/login', methods=['POST', 'GET'])
 def user_login():
     form = LoginForm()

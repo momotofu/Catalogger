@@ -21,18 +21,8 @@
         </ul>
         <a href="{{ url_for('category.allCategories') }}" class="nav-link
           text-white">CATALOG</a>
-        {% if not current_user.is_authenticated %}
-          <a class="btn btn-outline-light" href={{ url_for('login.user_login') }}>
-            <strong>login</strong>
-          </a>
-          <a class="btn btn-outline-light" href={{ url_for('login.user_signup') }}>
-            <strong>sign up</strong>
-          </a>
-        {% else %}
-          <a class="btn btn-outline-light" href={{ url_for('login.disconnect') }}>
-            <strong>logout</strong>
-          </a>
-        {% endif %}
+      {% endblock %}
+      {% block navCTA %}
       {% endblock %}
     </nav>
     {% block hero %}

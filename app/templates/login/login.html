@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block navLinks %}
   <li class="nav-item">
-    <a href="{{ url_for('category.allCategories') }}" class="nav-link">back</a>
+    <a href="{{ url_for('category.allCategories') }}" class="nav-link">
+      <i class="fas fa-chevron-left"></i>
+      <span class="nav-link__label">back</span>
+    </a>
   </li>
 {% endblock %}
 {% block mainContent %}
@@ -37,9 +40,13 @@
           value="LOGIN">
       </form>
     </div>
-    <a class="btn btn-outline-secondary btn-cancel btn-lg d-block mb-5" href={{ url_for('category.allCategories') }}>
-      CANCEL
-    </a>
+    <div class="col-lg text-center">
+      <span>Don't have an account yet?</span>
+      <a href={{
+        url_for('login.user_signup') }}>
+        Sign up
+      </a>
+    </div>
   </div>
 </div>
 {% endblock %}

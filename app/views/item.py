@@ -33,7 +33,6 @@ def getItems(category_id):
 @item.route('/category/<int:category_id>/items/new', methods=['GET', 'POST'])
 def createItem(category_id):
     # grab a reference to the category model
-    print('CATEGORY_ID: ', category_id)
     category = session.query(Category).filter(Category.id == category_id).one()
     if request.method == 'GET':
         try:
@@ -136,9 +135,6 @@ def deleteItem(category_id, item_id):
 
         # update the database
         session.commit()
-
-        # send feedback to the user
-        flash("Successfuly deleted %s from %s" % (item.name, category.name))
 
         return json.dumps({'name':item.name, 'success':True}), 200, {'ContentType':'application/json'}
 

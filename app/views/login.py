@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect
 from flask import url_for, flash
 from flask_login import LoginManager
+from flask_bcrypt import bcrypt
 from .forms import LoginForm
 from app.model import User
 from app.utils.utils import get_session, get_rand_string

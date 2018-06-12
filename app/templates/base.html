@@ -15,15 +15,19 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark
       text-light justify-content-between">
       {% block nav %}
-        <ul class="navbar-nav">
+        <ul class="navbar-nav col">
           {% block navLinks %}
           {% endblock %}
         </ul>
+      {% endblock %}
+      <div class="d-flex col-lg justify-content-center">
         <a href="{{ url_for('category.allCategories') }}" class="nav-link
           text-white">CATALOG</a>
-      {% endblock %}
-      {% block navCTA %}
-      {% endblock %}
+      </div>
+      <div class="d-flex col justify-content-end">
+        {% block navCTA %}
+        {% endblock %}
+      </div>
     </nav>
     {% block hero %}
     {% endblock %}

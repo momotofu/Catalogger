@@ -1,8 +1,8 @@
-.nav-link__label--expand-left {
+.nav-link__label {
   transition: all 0.1s;
 }
 
-.nav-link__label--expand-left:hover {
+.nav-link:hover .nav-link__label {
   padding-left: 3px;
   animation: none;
 }

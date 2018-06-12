@@ -15,11 +15,7 @@ login_manager = LoginManager()
 
 @login_manager.user_loader
 def load_user(user_id):
-    try:
-        user = session.query(User).filter(User.id == user.id)
-        return user
-    except:
-        return None
+    return User.query.get(user_id)
 
 
 @login.route('/login', methods=['POST', 'GET'])
@@ -28,9 +24,30 @@ def user_login():
 
     if request.method == 'POST':
         if form.validate() == False:
+
             flash('All fields are required')
+
             return render_template('login/login.html', form=form)
+
         else:
-            return redirect(url_for('category.allCategories'))
+            # get a reference to user model
+            user = User.query.get(form.email.data)
+
+            if user:
+                if bcrypt.check_password_hash(user.password, form.password.data):
+                    user.authenticated = True
+                    try:
+                        session.add(user)
+                        session.commit()
+                        login_user(user, remember=True)
+
+                        flash('Welcome back %s' % user.name)
+
+                        return redirect(url_for('category.allCategories'))
+
+                    except:
+                        session.rollback()
+                        raise
+
     else:
         return render_template('login/login.html', form=form)

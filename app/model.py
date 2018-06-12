@@ -30,6 +30,7 @@ class User(Base):
     picture = Column(String(80))
     username = Column(String(80))
     password_hash = Column(String(64))
+    authenticated = Column(Boolean(False), nullable=False)
 
     def is_active(self):
         """True, as all users are active."""

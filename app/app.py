@@ -2,6 +2,7 @@ from flask import Flask
 from app.config import Config as default_config
 from flask_webpack import Webpack
 from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
 
 
 def create_app(config=None):
@@ -10,6 +11,9 @@ def create_app(config=None):
     """
 
     app = configure_app(Flask(__name__), config)
+
+    # setup bcrypt
+    bcrypt = Bcrypt(app)
 
     # setup webpack for assets
     webpack = Webpack()

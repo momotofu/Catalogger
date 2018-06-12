@@ -1,4 +1,17 @@
 {% extends "base.html" %}
+{% block head %}
+  <div class="container-fluid flash-message">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flash-message__list">
+    {% for message in messages %}
+      <li class="alert flash-message__list-element "><strong>{{ message }}</strong></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+{% endblock %}
 {% block mainContent %}
 <div class="row mb-5 pb-5">
   <aside

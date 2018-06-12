@@ -5,3 +5,6 @@ package-lock.json
 
 node_modules/
 credentials/
+
+# remove for production
+app/static/images/

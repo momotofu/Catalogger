@@ -15,6 +15,29 @@ ul {
   list-style-type: none;
 }
 
+.flash-message {
+  background-color: #673AB7;
+  border: none;
+  margin-top: 56px;
+  padding: 0;
+  text-align: center;
+}
+
+.flash-message__list {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.flash-message__list-element {
+  border-radius: 0;
+  border: none;
+  border-bottom: solid 1px #f8f9fa;
+  background-color: inherit;
+  color: white;
+  margin-bottom: 0;
+}
+
 .item-card {
   padding-bottom: 48px;
   border: none;

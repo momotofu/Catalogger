@@ -7,6 +7,19 @@
     </a>
   </li>
 {% endblock %}
+{% block hero %}
+  <div class="container-fluid flash-message">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flash-message__list">
+    {% for message in messages %}
+      <li class="alert flash-message__list-element "><strong>{{ message }}</strong></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+{% endblock %}
 {% block mainContent %}
 <div class="row justify-content-center">
   <div class="col-lg-4">
@@ -51,4 +64,10 @@
 </div>
 {% endblock %}
 {% block scripts %}
+  <script defer type="text/javascript">
+    (function() {
+      // remove flash messages
+      categoryPageUtils.removeFlashMessages()
+    })()
+  </script>
 {% endblock %}

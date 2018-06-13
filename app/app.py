@@ -4,6 +4,18 @@ from flask_webpack import Webpack
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 
+from app.utils.utils import get_session
+from app.model import User
+
+session = get_session('sqlite:///catalog.db')
+login_manager = LoginManager()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    user = session.query(User).filter(User.id == user_id).one_or_none()
+    return user
+
 
 def create_app(config=None):
     """
@@ -20,7 +32,6 @@ def create_app(config=None):
     webpack.init_app(app)
 
     # setup flask-login
-    login_manager = LoginManager()
     login_manager.init_app(app)
 
     # setup flask blueprints

@@ -1,24 +1,16 @@
 from flask import Blueprint, render_template, request, redirect
 from flask import url_for, flash
-from flask_login import LoginManager, login_required, logout_user, current_user
+from flask_login import login_required, logout_user, current_user
 from flask_login import login_user
 from flask_bcrypt import bcrypt
 from .forms import LoginForm
 from app.model import User
-from app.utils.utils import get_session, get_rand_string
+from app.utils.utils import get_session
 
 session = get_session('sqlite:///catalog.db')
 login = Blueprint('login',
                         __name__,
                         template_folder='templates')
-
-login_manager = LoginManager()
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    user = session.query(User).filter(User.id == user_id)
-    return user
 
 
 @login.route('/signup', methods=['POST', 'GET'])
@@ -94,7 +86,7 @@ def user_login():
             user = session.query(User).filter(User.email ==
                     form.email.data).one_or_none()
 
-            if not user or not bcrypt.checkpw(user.password, form.password.data):
+            if not user and not bcrypt.checkpw(user.password, form.password.data):
                 # provide user feedback
                 flash('The email or password entered was not correct')
 

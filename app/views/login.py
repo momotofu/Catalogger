@@ -42,7 +42,8 @@ def user_signup():
 
             # check to make sure user doesn't already exist
             try:
-                prev_user = session.query(User).filter(email == email).all()
+                prev_user = session.query(User).filter(User.email ==
+                        email).one_or_none()
 
                 if not prev_user:
                     # create a new user
@@ -69,7 +70,7 @@ def user_signup():
                     # email
                     flash('A user already exists with that email')
 
-                    return redirect('login.user_signup')
+                    return redirect(url_for('login.user_signup'))
 
             except:
                 session.rollback()
@@ -89,14 +90,20 @@ def user_login():
             return render_template('login/login.html', form=form)
 
         else:
-            try:
-                # get a reference to user model
-                user = session.query(User).filter(User.email ==
-                        form.email.data).one()
+            # get a reference to the user model
+            user = session.query(User).filter(User.email ==
+                    form.email.data).one_or_none()
 
-                if bcrypt.check_password_hash(user.password, form.password.data):
-                    user.authenticated = True
+            if not user or not bcrypt.checkpw(user.password, form.password.data):
+                # provide user feedback
+                flash('The email or password entered was not correct')
 
+                return redirect(url_for('login.user_login'))
+
+            else:
+                user.authenticated = True
+
+                try:
                     # update datebase
                     session.add(user)
                     session.commit()
@@ -109,14 +116,13 @@ def user_login():
 
                     return redirect(url_for('category.allCategories'))
 
-            except:
-                session.rollback()
+                except:
+                    session.rollback()
 
-                # provide the user feedback
-                flash('Could not login')
+                    # provide the user feedback
+                    flash('Could not login')
 
-                return redirect(url_for('login.user_login'))
-
+                    return redirect(url_for('login.user_login'))
 
     else:
         return render_template('login/login.html', form=form)

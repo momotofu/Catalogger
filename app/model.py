@@ -32,6 +32,14 @@ class User(Base):
     password_hash = Column(String(64))
     authenticated = Column(Boolean(False), nullable=False)
 
+    @property
+    def name(self):
+        if not self.firstname:
+            return ""
+        elif not self.lastname:
+            return self.firstname
+        return self.firstname + self.lastname
+
     def is_active(self):
         """True, as all users are active."""
         return True

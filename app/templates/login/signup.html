@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block navLinks %}
+  <li class="nav-item">
+    <a href="{{ url_for('category.allCategories') }}" class="nav-link">
+      <i class="fas fa-chevron-left"></i>
+      <span class="nav-link__label">back</span>
+    </a>
+  </li>
+{% endblock %}
+{% block hero %}
+  <div class="container-fluid flash-message">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flash-message__list">
+    {% for message in messages %}
+      <li class="alert flash-message__list-element "><strong>{{ message }}</strong></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+{% endblock %}
+{% block mainContent %}
+<div class="row justify-content-center">
+  <div class="col-lg-4">
+    <h5 class="text-muted text-center mb-3" >
+      {% for message in form.errors %}
+        {{ message }}
+      {% endfor %}
+    </h5>
+    <div class="card mb-4">
+      <form class="card-body card-body-form" enctype=multipart/form-data method="POST">
+        <h5 class="card-title text-center">Create an account</h5>
+        {{ form.hidden_tag() }}
+        <div class="input-group mb-3 text-center">
+          {{ form.email(class_="form-control") }}
+          <div class="input-group-append">
+            <span class="input-group-text">
+              email
+            </span>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          {{ form.password(class_="form-control") }}
+          <div class="input-group-append">
+            <span class="input-group-text">
+              Password
+            </span>
+          </div>
+        </div>
+        <input
+          class="btn btn-primary btn-lg btn-block"
+          type="submit"
+          value="SIGNUP">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+  <script defer type="text/javascript">
+    (function() {
+      // remove flash messages
+      categoryPageUtils.removeFlashMessages()
+    })()
+  </script>
+{% endblock %}

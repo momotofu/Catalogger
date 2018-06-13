@@ -2,6 +2,7 @@ from app.model import Category, Item
 from app.utils.utils import get_session
 from flask import Blueprint, render_template, request
 from flask import current_app as app
+from flask_login import current_user
 
 import json, os
 

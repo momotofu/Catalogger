@@ -127,10 +127,6 @@ def user_login():
 @login.route("/logout", methods=["GET"])
 @login_required
 def logout():
-    """
-    Logout the current user.
-    """
-
     user = current_user
     user.authenticated = False
 

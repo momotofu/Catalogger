@@ -13,7 +13,7 @@
   </div>
 {% endblock %}
 {% block navCTA %}
-  {% if not current_user.is_authenticated %}
+  {% if not current_user.authenticated %}
     <a class="nav-link" href={{ url_for('login.user_login') }}>
       <strong>login</strong>
     </a>
@@ -21,7 +21,7 @@
       <strong>sign up</strong>
     </a>
     {% else %}
-    <a class="btn btn-outline-light" href={{ url_for('login.disconnect') }}>
+    <a class="btn btn-outline-light" href={{ url_for('login.logout') }}>
       <strong>logout</strong>
     </a>
   {% endif %}
@@ -210,6 +210,7 @@
 {% block scripts %}
   <script defer type="text/javascript">
     (function() {
+      console.log("{{ current_user.is_authenticated, current_user.email }}")
       // setup page ViewModel
       const page = new Page()
 

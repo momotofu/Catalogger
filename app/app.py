@@ -11,7 +11,7 @@ login_manager = LoginManager()
 
 @login_manager.user_loader
 def load_user(user_id):
-    user = session.query(User).filter(User.id == user_id).one_or_none()
+    user = session.query(User).filter(User.email == user_id).one_or_none()
     return user
 
 
@@ -28,6 +28,7 @@ def create_app(config=None):
 
     # setup flask-login
     login_manager.init_app(app)
+    login_manager.view = 'login.user_login'
 
     # setup flask blueprints
     configure_blueprints(app)

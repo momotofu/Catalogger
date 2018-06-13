@@ -28,6 +28,12 @@
         {{ message }}
       {% endfor %}
     </h5>
+    <div class="col-lg text-center">
+      <a href="" class="btn btn-social btn-github">
+         <span class="fa fa-github"></span> Login with Github
+       </a>
+       <p>or</p>
+    </div>
     <div class="card mb-4">
       <form class="card-body card-body-form" enctype=multipart/form-data method="POST">
         {{ form.hidden_tag() }}
@@ -53,7 +59,7 @@
           value="LOGIN">
       </form>
     </div>
-    <div class="col-lg text-center">
+    <div class="col-lg text-center mb-3">
       <span>Don't have an account yet?</span>
       <a href={{
         url_for('login.user_signup') }}>

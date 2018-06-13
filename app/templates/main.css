@@ -15,6 +15,15 @@ ul {
   list-style-type: none;
 }
 
+.nav-link {
+  color: #EFEFEf;
+}
+
+.nav-link:hover {
+  color: #EFEFEf;
+  opacity: 0.8;
+}
+
 .flash-message {
   background-color: #26A69A;
   border: none;
@@ -123,6 +132,11 @@ ul {
 
 .list-group-item__label {
   overflow: auto;
+}
+
+.navbar {
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .main-content {

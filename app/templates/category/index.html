@@ -14,10 +14,10 @@
 {% endblock %}
 {% block navCTA %}
   {% if not current_user.authenticated %}
-    <a class="nav-link" href={{ url_for('login.user_login') }}>
+    <a class="nav-link" style="margin-top: .4rem" href={{ url_for('login.user_login') }}>
       <strong>login</strong>
     </a>
-    <a class="btn btn-primary" href={{ url_for('login.user_signup') }}>
+    <a class="btn btn-outline-light mt-2 mb-2" href={{ url_for('login.user_signup') }}>
       <strong>sign up</strong>
     </a>
     {% else %}

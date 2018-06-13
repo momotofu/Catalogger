@@ -115,7 +115,7 @@ def user_login():
                 # provide the user feedback
                 flash('Could not login')
 
-                return redirect(url_for('category.allCategories'))
+                return redirect(url_for('login'))
 
 
     else:

@@ -135,7 +135,7 @@ def logout():
         logout_user()
 
         # provide the user feedback
-        flash('Could not login')
+        flash('Successfuly logged out!')
 
         return redirect(url_for('category.allCategories'))
 

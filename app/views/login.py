@@ -69,7 +69,7 @@ def user_signup():
                     # email
                     flash('A user already exists with that email')
 
-                    return redirect('login/signup.html')
+                    return redirect('login.user_signup')
 
             except:
                 session.rollback()
@@ -115,7 +115,7 @@ def user_login():
                 # provide the user feedback
                 flash('Could not login')
 
-                return redirect(url_for('login'))
+                return redirect(url_for('login.user_login'))
 
 
     else:

@@ -1,5 +1,6 @@
 from app.model import Item, Category
-from app.utils.utils import get_session, allowed_file, get_rand_string
+from app.utils.utils import allowed_file, get_rand_string
+from app.app import session
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask import current_app as app, flash
 
@@ -8,7 +9,6 @@ from werkzeug.utils import secure_filename
 import os
 import json
 
-session = get_session('sqlite:///catalog.db')
 item = Blueprint('item',
                         __name__,
                         template_folder='templates')

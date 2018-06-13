@@ -5,9 +5,8 @@ from flask_login import login_user
 import bcrypt
 from .forms import LoginForm
 from app.model import User
-from app.utils.utils import get_session
+from app.app import session
 
-session = get_session('sqlite:///catalog.db')
 login = Blueprint('login',
                         __name__,
                         template_folder='templates')

@@ -86,10 +86,10 @@ def user_login():
             user = session.query(User).filter(User.email ==
                     form.email.data).one_or_none()
 
-            if (not user or
+            if (not user or not
                 bcrypt.checkpw(
-                    user.password_hash,
-                    form.password.data.encode())
+                    form.password.data.encode(),
+                    user.password_hash)
                 ):
                 # provide user feedback
                 flash('The email or password entered was not correct')

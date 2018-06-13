@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect
 from flask import url_for, flash
-from flask_login import LoginManager
+from flask_login import LoginManager, login_required, logout_user, current_user
 from flask_bcrypt import bcrypt
 from .forms import LoginForm
 from app.model import User
@@ -68,3 +68,28 @@ def user_login():
 
     else:
         return render_template('login/login.html', form=form)
+
+
+@login.route("/logout", methods=["GET"])
+@login_required
+def logout():
+    """
+    Logout the current user.
+    """
+
+    user = current_user
+    user.authenticated = False
+
+    try:
+        session.add(user)
+        session.commit()
+        logout_user()
+
+        # provide the user feedback
+        flash('Could not login')
+
+        return redirect(url_for('category.allCategories'))
+
+    except:
+        session.rollback()
+        raise

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, Binary
 from sqlalchemy import UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
@@ -29,7 +29,7 @@ class User(Base):
     email = Column(String(80), nullable=False)
     picture = Column(String(80))
     username = Column(String(80))
-    password_hash = Column(String(64))
+    password_hash = Column(Binary(64))
     authenticated = Column(Boolean(False), nullable=False)
 
     @property

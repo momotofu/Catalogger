@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect
 from flask import url_for, flash
 from flask_login import login_required, logout_user, current_user
 from flask_login import login_user
-from flask_bcrypt import bcrypt
+import bcrypt
 from .forms import LoginForm
 from app.model import User
 from app.utils.utils import get_session
@@ -86,7 +86,11 @@ def user_login():
             user = session.query(User).filter(User.email ==
                     form.email.data).one_or_none()
 
-            if not user and not bcrypt.checkpw(user.password, form.password.data):
+            if (not user or
+                bcrypt.checkpw(
+                    user.password_hash,
+                    form.password.data.encode())
+                ):
                 # provide user feedback
                 flash('The email or password entered was not correct')
 

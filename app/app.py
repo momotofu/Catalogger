@@ -2,8 +2,6 @@ from flask import Flask
 from app.config import Config as default_config
 from flask_webpack import Webpack
 from flask_login import LoginManager
-from flask_bcrypt import Bcrypt
-
 from app.utils.utils import get_session
 from app.model import User
 
@@ -23,9 +21,6 @@ def create_app(config=None):
     """
 
     app = configure_app(Flask(__name__), config)
-
-    # setup bcrypt
-    bcrypt = Bcrypt(app)
 
     # setup webpack for assets
     webpack = Webpack()

@@ -9,4 +9,4 @@ itsdangerous >= 0.24
 Flask-Webpack == 0.1.0
 flask-login >= 0.4.1
 Flask-WTF >= 0.14.2
-flask-bcrypt >= 0.7.1
+bcrypt >= 3.1.4

@@ -1,14 +1,16 @@
 from flask import Blueprint, render_template, request, redirect
 from flask import url_for, flash, session as login_session
+from flask import current_app as app
 from flask_login import login_required, logout_user, current_user
 from flask_login import login_user
 
 from .forms import LoginForm
 from app.model import User
 from app.app import session
-from app.utils.utils import get_rand_string
+from app.utils.utils import get_rand_string, get_credentials_for
 
 import bcrypt
+import json
 
 login = Blueprint('login',
                         __name__,
@@ -127,12 +129,18 @@ def user_login():
 
     else:
         state = get_rand_string()
+        github_creds = get_credentials_for('oauth', 'github')
         login_session['state'] = state
+        oauth = {
+            github_client_id: github_creds['client_id']
+        }
 
-        return render_template('login/login.html', form=form, state=state)
+
+        return render_template('login/login.html', form=form, state=state,
+                oauth=oauth)
 
 
-@login.route("/logout", methods=["GET"])
+@login.route('/logout', methods=['GET'])
 @login_required
 def logout():
     user = current_user
@@ -151,3 +159,7 @@ def logout():
     except:
         session.rollback()
         raise
+
+@login.route('/connect', methods=['POST'])
+def oauthConnect():
+    pass

@@ -1,3 +1,5 @@
+import os
+
 class Config(object):
     DEBUG = False
     TESTING = False
@@ -8,6 +10,7 @@ class Config(object):
     SECRET_KEY = 'super_secret_key'
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
     WEBPACK_MANIFEST_PATH = '../build/manifest.json'
+    CREDENTIALS_PATH = os.path.abspath('../credentials/config.json')
 
 class DevelopmentConfig(Config):
     DEBUG = True

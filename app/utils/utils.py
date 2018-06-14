@@ -26,3 +26,13 @@ def get_session(db_path):
     session = DBSession()
 
     return session
+
+def get_credentials_for(subject, provider):
+    """
+    Returns a dictionary with credentials for the provider.
+    """
+
+    from flask import current_app as app
+
+    return json.loads(open(app.config['CREDENTIALS_PATH'],
+        'r').read())[subject][provider]

@@ -1,11 +1,14 @@
 from flask import Blueprint, render_template, request, redirect
-from flask import url_for, flash
+from flask import url_for, flash, session as login_session
 from flask_login import login_required, logout_user, current_user
 from flask_login import login_user
-import bcrypt
+
 from .forms import LoginForm
 from app.model import User
 from app.app import session
+from app.utils.utils import get_rand_string
+
+import bcrypt
 
 login = Blueprint('login',
                         __name__,
@@ -120,7 +123,10 @@ def user_login():
                     return redirect(url_for('login.user_login'))
 
     else:
-        return render_template('login/login.html', form=form)
+        state = get_rand_string()
+        login_session['state'] = state
+
+        return render_template('login/login.html', form=form, state=state)
 
 
 @login.route("/logout", methods=["GET"])

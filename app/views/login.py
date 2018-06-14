@@ -20,6 +20,9 @@ def user_signup():
     form = LoginForm()
 
     if request.method == 'GET':
+        state = get_rand_string()
+        login_session['state'] = state
+
         return render_template('login/signup.html', form=form)
 
     elif request.method == 'POST':

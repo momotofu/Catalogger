@@ -27,9 +27,15 @@ ul {
 .flash-message {
   background-color: #26A69A;
   border: none;
-  margin-top: 56px;
+  margin-top: 70px;
   padding: 0;
   text-align: center;
+}
+
+@media screen and (max-width: 991px) {
+  .flash-message {
+    margin-top: 111px;
+  }
 }
 
 .flash-message__list {

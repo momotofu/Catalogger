@@ -126,6 +126,51 @@ ul {
   margin: 0 22px;
 }
 
+.btn-social {
+  border: 2px solid #363636;
+  display: flex;
+  align-self: center;
+  background: #444444;
+  border-radius: 3px;
+  padding: 0.6rem 0.75rem;
+  display: inline-block;
+  color: white;
+  font-weight: 500;
+  position: relative;
+}
+
+.btn-social:hover {
+  color: white;
+  background: #414141;
+  border-color: #212121;
+  text-decoration: none;
+}
+
+.btn-social:hover > span:before {
+  background: #212121;
+}
+
+.btn-social:active {
+  color: white;
+  opacity: 0.8;
+  background: #414141;
+}
+
+.btn-social > span {
+  margin-left: 24px;
+}
+
+.btn-social > span:before {
+  content: '';
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  background: #363636;
+  display: flex;
+  left: 46px;
+  top: 0;
+}
+
 .list-group-item:hover {
   cursor: pointer;
 }

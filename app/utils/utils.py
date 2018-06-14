@@ -1,4 +1,4 @@
-import random, string
+import random, string, json
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.model import Base

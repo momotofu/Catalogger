@@ -132,7 +132,7 @@ def user_login():
         github_creds = get_credentials_for('oauth', 'github')
         login_session['state'] = state
         oauth = {
-            github_client_id: github_creds['client_id']
+            'github_client_id': github_creds['client_id']
         }
 
 

@@ -11,6 +11,9 @@ from app.utils.utils import get_rand_string, get_credentials_for
 
 import bcrypt
 import json
+import requests
+import urllib.parse as urlparse
+from pdb import set_trace as bp
 
 login = Blueprint('login',
                         __name__,
@@ -128,13 +131,14 @@ def user_login():
                     return redirect(url_for('login.user_login'))
 
     else:
+        # Todo: implement session token for security
         state = get_rand_string()
-        github_creds = get_credentials_for('oauth', 'github')
         login_session['state'] = state
-        oauth = {
-            'github_client_id': github_creds['client_id']
-        }
 
+        # populate an oauth credentials dictionary to be used for client side
+        # oauth
+        github_creds = get_credentials_for('oauth', 'github')
+        oauth = {'github_client_id': github_creds['client_id']}
 
         return render_template('login/login.html', form=form, state=state,
                 oauth=oauth)
@@ -160,6 +164,75 @@ def logout():
         session.rollback()
         raise
 
-@login.route('/connect', methods=['POST'])
-def oauthConnect():
-    pass
+@login.route('/ghconnect')
+def githubConnect():
+    state = request.args.get('state')
+
+    # ensure state is the same
+    if not state == login_session['state']:
+        # provide the user feedback
+        flash('failed to authenticate using github')
+
+        return redirect(url_for('login.user_login'))
+
+    # get githubs temporary code ...
+    session_code = request.args.get('code')
+
+    # ... and POST it back to github
+    try:
+        github_creds = get_credentials_for('oauth', 'github')
+
+        payload = {
+            'client_id': github_creds['client_id'],
+            'client_secret': github_creds['client_secret'],
+            'code': session_code,
+            'accept': 'json'}
+
+        result = urlparse.parse_qs(
+            requests.get(
+                'https://github.com/login/oauth/access_token',
+                params=payload).text)
+
+        if 'error' in result:
+            # let developer know why oath failed
+            print('%s - while trying to authenticate: ' % result['error'])
+
+            # provide the user feedback
+            flash('failed to authenticate using github')
+
+            return redirect(url_for('login.user_login'))
+
+        # get scope of user allowed data
+        scopes = result['scope']
+        has_user_email_scope = True if 'user:email' in scopes else False
+
+        if not has_user_email_scope:
+            # provide the user feedback
+            flash('You must provide email access to create an account')
+
+            return redirect(url_for('login.user_login'))
+
+
+        # get access token from github oauth response
+        access_token = result['access_token']
+        payload = { 'access_token': access_token }
+
+        # fetch user information
+        auth_result = requests.get('https://api.github.com/user',
+            params=payload).json()
+
+        # fetch user private email
+        auth_result['private_emails'] = (
+        requests.get('https://api.github.com/user/emails',
+            params=payload).json())
+
+        return json.dumps(auth_result)
+
+    except:
+        raise
+        # provide the user feedback
+        flash('failed to authenticate using github')
+
+        return redirect(url_for('login.user_login'))
+
+

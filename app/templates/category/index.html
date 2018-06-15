@@ -14,8 +14,8 @@
 {% endblock %}
 {% block navCTA %}
   {% if not current_user.authenticated %}
-    <a class="nav-link" style="margin-top: .4rem" href={{ url_for('login.user_login') }}>login</a>
-    <a class="btn btn-outline-light mt-2 mb-2" href={{ url_for('login.user_signup') }}>sign up</a>
+    <a class="nav-link align-self-center" href={{ url_for('login.user_login') }}>login</a>
+    <a class="btn btn-outline-light align-self-center" href={{ url_for('login.user_signup') }}>sign up</a>
   {% else %}
     <a class="btn btn-outline-light" href={{ url_for('login.logout') }}>logout</a>
   {% endif %}

@@ -8,3 +8,4 @@ credentials/
 
 # remove for production
 app/static/images/
+*.db

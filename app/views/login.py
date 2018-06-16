@@ -218,15 +218,40 @@ def githubConnect():
         payload = { 'access_token': access_token }
 
         # fetch user information
-        auth_result = requests.get('https://api.github.com/user',
-            params=payload).json()
+        # auth_result = requests.get('https://api.github.com/user',
+            # params=payload).json()
+        auth_result = {}
 
         # fetch user private email
         auth_result['private_emails'] = (
         requests.get('https://api.github.com/user/emails',
             params=payload).json())
 
-        return json.dumps(auth_result)
+        user_email = auth_result['private_emails'][0]['email']
+
+        # get reference to user model
+        user = (
+            session.query(User)
+            .filter(User.email == user_email)
+            .one_or_none())
+
+        if not user:
+            # create a user
+            return json.dumps(auth_result)
+
+        user.authenticated = True
+
+        # update datebase
+        session.add(user)
+        session.commit()
+
+        # store user in session
+        login_user(user, remember=True)
+
+        # provide the user feedback
+        flash('Welcome back %s' % user.name)
+
+        return redirect(url_for('category.allCategories'))
 
     except:
         raise

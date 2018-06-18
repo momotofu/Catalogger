@@ -27,8 +27,7 @@ class User(Base):
     firstname = Column(String(80))
     lastname = Column(String(80))
     email = Column(String(80), nullable=False)
-    picture = Column(String(80))
-    username = Column(String(80))
+    picture_url = Column(String(80))
     password_hash = Column(Binary(64))
     authenticated = Column(Boolean(False), nullable=False)
 

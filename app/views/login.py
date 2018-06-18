@@ -223,12 +223,10 @@ def githubConnect():
         access_token = result['access_token']
         payload = { 'access_token': access_token }
 
-        auth_result = {}
-
         # fetch user private email
         user_email = (
         requests.get('https://api.github.com/user/emails',
-            params=payload).json())['private_emails'][0]['email']
+            params=payload).json())[0]['email']
 
         # get reference to user model
         user = (
@@ -241,7 +239,15 @@ def githubConnect():
             user_info = requests.get('https://api.github.com/user', params=payload).json()
 
             # create a user
-            return json.dumps(auth_result)
+            # get name
+            firstname = user_info['name'].split(' ')[0]
+            picture_url = user_info['avatar_url']
+            email = user_email
+
+            user = User(
+                    firstname = firstname,
+                    picture_url = picture_url,
+                    email = email)
 
         user.authenticated = True
 

@@ -29,7 +29,10 @@
       {% endfor %}
     </h5>
     <div class="col-lg text-center mb-4">
-        <a href="" class="btn-social mb-3">
+        <a
+          href="https://github.com/login/oauth/authorize?scope=user:email&client_id={{
+         oauth.github_client_id }}&state={{ state }}"
+          class="btn-social mb-3">
           <i class="fab fa-github fa-lg"></i>
           <span>Signup using Github</span>
          </a>

@@ -28,7 +28,12 @@ def user_signup():
         state = get_rand_string()
         login_session['state'] = state
 
-        return render_template('login/signup.html', form=form)
+        # populate an oauth credentials dictionary to be used for client side
+        # oauth
+        github_creds = get_credentials_for('oauth', 'github')
+        oauth = {'github_client_id': github_creds['client_id']}
+
+        return render_template('login/signup.html', oauth=oauth, form=form)
 
     elif request.method == 'POST':
         if form.validate() == False:

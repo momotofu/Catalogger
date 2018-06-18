@@ -33,7 +33,8 @@ def user_signup():
         github_creds = get_credentials_for('oauth', 'github')
         oauth = {'github_client_id': github_creds['client_id']}
 
-        return render_template('login/signup.html', oauth=oauth, form=form)
+        return render_template('login/signup.html', oauth=oauth, form=form,
+                state=state)
 
     elif request.method == 'POST':
         if form.validate() == False:
@@ -222,17 +223,12 @@ def githubConnect():
         access_token = result['access_token']
         payload = { 'access_token': access_token }
 
-        # fetch user information
-        # auth_result = requests.get('https://api.github.com/user',
-            # params=payload).json()
         auth_result = {}
 
         # fetch user private email
-        auth_result['private_emails'] = (
+        user_email = (
         requests.get('https://api.github.com/user/emails',
-            params=payload).json())
-
-        user_email = auth_result['private_emails'][0]['email']
+            params=payload).json())['private_emails'][0]['email']
 
         # get reference to user model
         user = (
@@ -241,6 +237,9 @@ def githubConnect():
             .one_or_none())
 
         if not user:
+            # fetch user information
+            user_info = requests.get('https://api.github.com/user', params=payload).json()
+
             # create a user
             return json.dumps(auth_result)
 

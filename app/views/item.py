@@ -3,6 +3,7 @@ from app.utils.utils import allowed_file, get_rand_string
 from app.app import session
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask import current_app as app, flash
+from flask_login import current_user
 
 from werkzeug.utils import secure_filename
 
@@ -17,11 +18,20 @@ item = Blueprint('item',
 @item.route('/category/<int:category_id>/items')
 def getItems(category_id):
     try:
-        items = (
-            session.query(Item)
-            .join(Item.item_children)
-            .filter(Category.id == category_id)
-            .all())
+        if current_user.is_authenticated:
+            items = (
+                session.query(Item)
+                .filter(Item.user_id == current_user.id)
+                .join(Item.item_children)
+                .filter(Category.id == category_id)
+                .all())
+        else:
+            items = (
+                session.query(Item)
+                .filter(Item.user_id == None)
+                .join(Item.item_children)
+                .filter(Category.id == category_id)
+                .all())
 
         return json.dumps([item.serialize for item in items])
 

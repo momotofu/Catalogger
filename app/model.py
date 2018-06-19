@@ -66,11 +66,13 @@ class Category(Base):
     depth = Column(Integer, nullable=False)
     name = Column(String(80), nullable=False)
     type = Column(String(80), nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id'))
     ParentID = Column(Integer,
         ForeignKey('category.id',
         ondelete='CASCADE'))
 
     # relationships
+    user = relationship(User)
     Children = relationship('Category',
         cascade="all",
         backref=backref('Parent', remote_side=[id]))

@@ -36,7 +36,7 @@ def getItems(category_id):
         return json.dumps([item.serialize for item in items])
 
     except:
-        raise
+        return json.dumps({'error': 'unable to fetch items'}), 400
 
 
 @item.route('/category/<int:category_id>/items/new', methods=['GET', 'POST'])

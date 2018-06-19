@@ -15,15 +15,16 @@ category = Blueprint('category',
 @category.route('/categories')
 def allCategories():
     if current_user.is_authenticated:
-        # get all user items
-        items = (
+        categories = (
                 session.query(Category)
-                .filter(Item.user_id == current_user.id)
-        )
-         # s = session.query(Category).join(Items_And_Categories).join(Item).filter(Item.user_id == current_user.id)
-        # get all item categories
-    # grab categories from database
-    categories = session.query(Category).filter(Category.depth == 0).all()
+                .filter(Category.user_id == current_user.id)
+                .all())
+    else:
+        # grab categories from database
+        categories = (
+                session.query(Category)
+                .filter(Category.user_id == None)
+                .all())
 
     # serialize and prepare category objects for json
     categories_serialized = [category.serialize for category in categories]
@@ -48,6 +49,10 @@ def newCategory():
         return json.dumps({'error': 'missing name parameter'}), 422
 
     try:
+        # attach category to user
+        if current_user.is_authenticated:
+            category.user_id = current_user.id
+
         # add new category to the database
         session.add(category)
         session.commit()
@@ -56,7 +61,6 @@ def newCategory():
 
     except:
         session.rollback()
-        raise
 
         return json.dumps({'error': 'failed to create a category'}), 400
 

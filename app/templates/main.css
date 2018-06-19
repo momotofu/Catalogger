@@ -42,6 +42,7 @@ ul {
   border: none;
   border-radius: 0;
   padding: 0;
+  position: relative;
 }
 
 .flash-message__list-element {
@@ -51,6 +52,10 @@ ul {
   background-color: inherit;
   color: white;
   margin-bottom: 0;
+  width: 100%;
+  background: #26A69A;
+  position: absolute;
+  text-align: center;
 }
 
 .mini-portrait {

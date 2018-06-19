@@ -56,6 +56,7 @@ def createItem(category_id):
             item = Item( type=category.name, name=params['name'],
                 details=params['details'])
 
+            # attach a user to an item
             if current_user.is_authenticated:
                 item.user_id = current_user.id
 

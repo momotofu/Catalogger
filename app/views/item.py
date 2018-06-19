@@ -33,12 +33,10 @@ def getItems(category_id):
 def createItem(category_id):
     # grab a reference to the category model
     category = session.query(Category).filter(Category.id == category_id).one()
-    if request.method == 'GET':
-        try:
-            return render_template('item/index.html', category=category)
 
-        except:
-            raise
+    # render the item creation form
+    if request.method == 'GET':
+        return render_template('item/index.html', category=category)
 
     if request.method == 'POST':
         try:
@@ -47,6 +45,9 @@ def createItem(category_id):
             # create an item object from form params
             item = Item( type=category.name, name=params['name'],
                 details=params['details'])
+
+            if current_user.is_authenticated:
+                item.user_id = current_user.id
 
             if 'image' in request.files.keys():
                 image = request.files['image']

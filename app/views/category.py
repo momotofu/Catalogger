@@ -14,15 +14,18 @@ category = Blueprint('category',
 @category.route('/')
 @category.route('/categories')
 def allCategories():
-    if current_user.authenticated:
-        raise
-        # get all user items
-        # get all item categories
-        try:
-            categories = (
-                    session.query(Item)
-                    .filter(Item.user_id == current_user)
-        pass
+    # if current_user.is_authenticated:
+        # # get all user items
+        # # get all item categories
+        # raise
+        # try:
+            # categories = (
+                    # session.query(Item)
+                    # .filter(Item.user_id == current_user.id)
+                    # .join(Item.item_children)
+            # )
+        # except:
+            # pass
     # grab categories from database
     categories = session.query(Category).filter(Category.depth == 0).all()
 

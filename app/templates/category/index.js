@@ -267,7 +267,6 @@ const CategoryList = function(categories, delegate) {
 
   // setup subscriptions
   this.activeCategoryId.subscribe(function(newValue) {
-    console.log('active id set: ', newValue)
     const category = this.getCategory(newValue)
     this.delegate.setActiveCategory(category)
   }, this)

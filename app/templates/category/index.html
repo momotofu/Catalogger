@@ -1,4 +1,12 @@
 {% extends "base.html" %}
+{% block navCTA %}
+  {% if not current_user.authenticated %}
+    <a class="nav-link align-self-center" href={{ url_for('login.user_login') }}>login</a>
+    <a class="btn btn-outline-light align-self-center" href={{ url_for('login.user_signup') }}>sign up</a>
+  {% else %}
+    <a class="btn btn-outline-light" href={{ url_for('login.logout') }}>logout</a>
+  {% endif %}
+{% endblock %}
 {% block hero %}
   <div class="container-fluid flash-message">
     {% with messages = get_flashed_messages() %}
@@ -11,14 +19,6 @@
     {% endif %}
     {% endwith %}
   </div>
-{% endblock %}
-{% block navCTA %}
-  {% if not current_user.authenticated %}
-    <a class="nav-link align-self-center" href={{ url_for('login.user_login') }}>login</a>
-    <a class="btn btn-outline-light align-self-center" href={{ url_for('login.user_signup') }}>sign up</a>
-  {% else %}
-    <a class="btn btn-outline-light" href={{ url_for('login.logout') }}>logout</a>
-  {% endif %}
 {% endblock %}
 {% block mainContent %}
 <div class="row mb-5 pb-5">

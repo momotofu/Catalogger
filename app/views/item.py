@@ -146,6 +146,16 @@ def deleteItem(category_id, item_id):
     item = session.query(Item).filter(Item.id == item_id).one()
     category = session.query(Category).filter(Category.id == category_id).one()
 
+    # restrict access if item doesn't belong to user
+    if (not current_user.is_authenticated and item.user_id
+        or (current_user.is_authenticated and
+            not current_user.id == item.user_id)):
+
+        # send feedback to the user
+        flash('You do not have permission to delete that item')
+
+        return redirect(url_for('category.allCategories'))
+
     try:
         # remove category from item.
         item.item_children.remove(category)

@@ -19,10 +19,9 @@ def getItems(category_id):
     try:
         items = (
             session.query(Item)
-                .join(Item.item_children)
-                .filter(Category.id == category_id)
-                .all()
-        )
+            .join(Item.item_children)
+            .filter(Category.id == category_id)
+            .all())
 
         return json.dumps([item.serialize for item in items])
 

@@ -14,6 +14,15 @@ category = Blueprint('category',
 @category.route('/')
 @category.route('/categories')
 def allCategories():
+    if current_user.authenticated:
+        raise
+        # get all user items
+        # get all item categories
+        try:
+            categories = (
+                    session.query(Item)
+                    .filter(Item.user_id == current_user)
+        pass
     # grab categories from database
     categories = session.query(Category).filter(Category.depth == 0).all()
 
@@ -50,7 +59,9 @@ def newCategory():
 
     except:
         session.rollback()
-        raise
+
+        # TODO: return json exceptions to the user
+        return json.dumps({'error': 'failed to create a category'}), 400
 
 
 @category.route('/categories/<int:category_id>/delete', methods=['POST'])

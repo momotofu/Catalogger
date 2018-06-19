@@ -94,6 +94,15 @@ def editItem(category_id, item_id):
     item = session.query(Item).filter(Item.id == item_id).one()
 
     if request.method == 'GET':
+        # restrict access if item doesn't belong to user
+        if (not current_user.is_authenticated and item.user_id
+            or (current_user.is_authenticated and
+                not current_user.id == item.user_id)):
+
+            flash('You do not have permission to edit that item')
+
+            return redirect(url_for('category.allCategories'))
+
         # serve up edit form
         return render_template('item/edit.html', item=item, category=category)
 

@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% if current_user.authenticated and current_user.picture_url %}
-  {% block navLinks %}
-  <img
-    src="{{ current_user.picture_url }}"
-    alt="photo of {{ current_user.name }}"
-    class="mini-portrait"/>
-  {% endblock %}
-{% endif %}
+{% block navLinks %}
+  {% if current_user.authenticated and current_user.picture_url %}
+    <img
+      src="{{ current_user.picture_url }}"
+      alt="photo of {{ current_user.name }}"
+      class="mini-portrait"/>
+  {% endif %}
+{% endblock %}
 {% block navCTA %}
   {% if not current_user.authenticated %}
     <a class="nav-link align-self-center" href={{ url_for('login.user_login') }}>login</a>

@@ -37,7 +37,7 @@ def newCategory():
             type=name,
             depth=0)
     else:
-        return
+        return json.dumps({'error': 'missing name parameter'}), 422
 
     try:
         # add new category to the database

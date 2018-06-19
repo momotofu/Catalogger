@@ -53,6 +53,26 @@ ul {
   margin-bottom: 0;
 }
 
+.mini-portrait {
+  border-radius: 100px;
+  width: 39px;
+  height: 39px;
+}
+
+.mini-portrait:hover {
+  cursor: not-allowed;
+}
+
+.navbar__section {
+  order: 2;
+}
+
+@media only screen and (max-width: 990px) {
+  .navbar__section-center {
+    order: 1;
+  }
+}
+
 .item-card {
   padding-bottom: 48px;
   border: none;

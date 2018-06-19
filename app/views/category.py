@@ -1,4 +1,4 @@
-from app.model import Category, Item
+from app.model import Category, Item, Items_And_Categories
 from app.app import session
 from flask import Blueprint, render_template, request
 from flask import current_app as app
@@ -14,18 +14,14 @@ category = Blueprint('category',
 @category.route('/')
 @category.route('/categories')
 def allCategories():
-    # if current_user.is_authenticated:
-        # # get all user items
-        # # get all item categories
-        # raise
-        # try:
-            # categories = (
-                    # session.query(Item)
-                    # .filter(Item.user_id == current_user.id)
-                    # .join(Item.item_children)
-            # )
-        # except:
-            # pass
+    if current_user.is_authenticated:
+        # get all user items
+        items = (
+                session.query(Category)
+                .filter(Item.user_id == current_user.id)
+        )
+         # s = session.query(Category).join(Items_And_Categories).join(Item).filter(Item.user_id == current_user.id)
+        # get all item categories
     # grab categories from database
     categories = session.query(Category).filter(Category.depth == 0).all()
 
@@ -56,14 +52,12 @@ def newCategory():
         session.add(category)
         session.commit()
 
-        # return item with database given id
-        category = session.query(Category).filter(Category.name == category.name).one()
         return json.dumps(category.serialize)
 
     except:
         session.rollback()
+        raise
 
-        # TODO: return json exceptions to the user
         return json.dumps({'error': 'failed to create a category'}), 400
 
 

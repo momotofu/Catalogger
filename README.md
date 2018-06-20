@@ -1,7 +1,7 @@
 # Catalog
 A web app to login and create your own categories and items. Upload photos, details, and just catalog stuff. Or you can remain add items to the public catalog, without needing to login.
 
-![Alt text](/app_screen_shot.jpg?raw=true "App Screen Shot")
+![Alt text](/app_screen_shot.png?raw=true "App Screen Shot")
 
 ## Web application features and technologies
 - API for categories and items with JSON endpoints. (needs documentation)

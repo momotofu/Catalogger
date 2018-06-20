@@ -80,7 +80,9 @@ def createItem(category_id):
             # send feedback to the user
             flash("%s created!" % item.name)
 
-            return redirect(url_for("category.allCategories"))
+            return redirect(url_for(
+                "category.allCategories",
+                current_category_id=category_id))
 
         except:
             session.rollback()
@@ -102,10 +104,11 @@ def editItem(category_id, item_id):
         # send feedback to the user
         flash('You do not have permission to edit that item')
 
-        return redirect(url_for('category.allCategories'))
+        return redirect(url_for(
+            'category.allCategories',
+            current_category_id=category_id))
 
     if request.method == 'GET':
-
         # serve up edit form
         return render_template('item/edit.html', item=item, category=category)
 
@@ -133,7 +136,9 @@ def editItem(category_id, item_id):
             # send feedback to the user
             flash("%s updated!" % item.name)
 
-            return redirect(url_for("category.allCategories"))
+            return redirect(url_for(
+                "category.allCategories",
+                current_category_id=category_id))
 
         except:
             session.rollback()
@@ -155,7 +160,9 @@ def deleteItem(category_id, item_id):
         # send feedback to the user
         flash('You do not have permission to delete that item')
 
-        return redirect(url_for('category.allCategories'))
+        return redirect(url_for(
+            'category.allCategories',
+            current_category_id=category_id))
 
     try:
         # remove category from item.

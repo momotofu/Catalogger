@@ -223,8 +223,8 @@
       ko.applyBindings(page, document.getElementById('page'))
 
       // set active category
-      const current_category_id = {{ current_category_id }}
-      if (current_category_id) {
+      const current_category_id = '{{ current_category_id }}'
+      if (current_category_id !== 'None') {
         categoryList.setActiveCategoryId(current_category_id)
       }
 

@@ -16,12 +16,13 @@ category = Blueprint('category',
 @category.route('/categories/<int:current_category_id>')
 def allCategories(current_category_id=None):
     if current_user.is_authenticated:
+        # grab user specific categories from the database
         categories = (
                 session.query(Category)
                 .filter(Category.user_id == current_user.id)
                 .all())
     else:
-        # grab categories from database
+        # grab public categories from the database
         categories = (
                 session.query(Category)
                 .filter(Category.user_id == None)

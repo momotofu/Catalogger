@@ -64,7 +64,7 @@ const Page = function() {
     // setup get URL
     const id = this.activeCategory().id
     const baseURL = getBaseURLFrom(window.location.href)
-    const url = `${baseURL}/category/${id}/items`
+    const url = `${baseURL}/category/${id}/items/JSON`
 
     // get item JSON
     $.get({

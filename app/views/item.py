@@ -14,30 +14,6 @@ item = Blueprint('item',
                         __name__,
                         template_folder='templates')
 
-@item.route('/')
-@item.route('/category/<int:category_id>/items')
-def getItems(category_id):
-    try:
-        if current_user.is_authenticated:
-            items = (
-                session.query(Item)
-                .filter(Item.user_id == current_user.id)
-                .join(Item.item_children)
-                .filter(Category.id == category_id)
-                .all())
-        else:
-            items = (
-                session.query(Item)
-                .filter(Item.user_id == None)
-                .join(Item.item_children)
-                .filter(Category.id == category_id)
-                .all())
-
-        return json.dumps([item.serialize for item in items])
-
-    except:
-        return json.dumps({'error': 'unable to fetch items'}), 400
-
 
 @item.route('/category/<int:category_id>/items/new', methods=['GET', 'POST'])
 def createItem(category_id):

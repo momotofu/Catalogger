@@ -65,3 +65,23 @@ def getItems(category_id):
         return json.dumps({'error': 'unable to fetch items'}), 400
 
 
+@api.route('/items/<int:item_id>/JSON')
+def getItem(item_id):
+    try:
+        # grab on ORM reference to the item
+        item = (
+            session.query(Item)
+            .filter(Item.id == item_id)
+            .one())
+
+        # restrict access if item is associated with a user
+        if item.user_id and not current_user.is_authenticated:
+            return json.dumps({
+                'error': 'you do not have access to this item'}), 400
+        else:
+            return json.dumps(item.serialize)
+
+    except:
+        return json.dumps({'error': 'unable to fetch items'}), 400
+
+

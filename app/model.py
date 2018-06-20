@@ -85,7 +85,8 @@ class Category(Base):
             'name' : self.name,
             'depth' : self.depth,
             'type' : self.type,
-            'parentId' : self.ParentID
+            'parentId' : self.ParentID,
+            'user_id' : self.user_id
         }
 
 
@@ -171,6 +172,6 @@ class Items_And_Categories(Base):
     item = relationship('Item')
     category = relationship('Category')
 
-
-engine = create_engine('sqlite:///catalog.db')
-Base.metadata.create_all(engine)
+if __name__ == '__main__':
+    engine = create_engine('sqlite:///catalog.db')
+    Base.metadata.create_all(engine)

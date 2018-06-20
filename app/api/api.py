@@ -1,24 +1,30 @@
 from flask import Blueprint, send_from_directory
 from flask_login import current_user
+from flask_httpauth import HTTPBasicAuth
 
 from app.app import session
 from app.model import Category, Item
 
-import json
+import json, os
 
 api = Blueprint('api',
                         __name__,
                         template_folder='templates')
+auth = HTTPBasicAuth()
 
-
-# API endpoints
+# API for local assets
 @api.route('/images', defaults={'filename': 'filler.jpg'})
 @api.route('/images/<filename>')
 def image_file(filename):
     return send_from_directory('static/images', filename)
 
 
+@api.route('/build/public/<filename>')
+def getAsset(filename):
+    return send_from_directory(os.path.abspath('build/public'), filename)
 
+
+# API data endpoints
 @api.route('/categories/JSON')
 def getCategories():
     if current_user.is_authenticated:
@@ -83,5 +89,3 @@ def getItem(item_id):
 
     except:
         return json.dumps({'error': 'unable to fetch items'}), 400
-
-

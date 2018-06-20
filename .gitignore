@@ -7,5 +7,5 @@ node_modules/
 credentials/
 
 # remove for production
-app/static/images/
+app/static/images/*
 *.db

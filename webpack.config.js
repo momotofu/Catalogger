@@ -82,7 +82,8 @@ module.exports = (env, options) => {
           chunkFilename: "[id].[hash].css"
         }),
         new ManifestRevisionPlugin(path.join('build', 'manifest.json'), {
-          rootAssetPath: rootAssetPath
+          rootAssetPath: rootAssetPath,
+          ignorePaths: ['/images']
         })
       ]
   }

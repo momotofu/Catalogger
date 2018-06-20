@@ -32,6 +32,18 @@ class User(Base):
     authenticated = Column(Boolean(False), nullable=False)
 
     @property
+    def serialize(self):
+        # returns object data in easily serializeable format
+        return {
+            'id': self.id,
+            'firstname': self.firstname,
+            'lastname': self.lastname,
+            'name': self.name,
+            'email': self.email,
+            'picture_url': self.picture_url
+        }
+
+    @property
     def name(self):
         if not self.firstname:
             return ""

@@ -13,7 +13,8 @@ category = Blueprint('category',
 
 @category.route('/')
 @category.route('/categories')
-def allCategories():
+@category.route('/categories/<int:current_category_id>')
+def allCategories(current_category_id=None):
     if current_user.is_authenticated:
         categories = (
                 session.query(Category)
@@ -30,7 +31,10 @@ def allCategories():
     categories_serialized = [category.serialize for category in categories]
     categories_serialized.reverse()
 
-    return render_template('category/index.html', categories=json.dumps(categories_serialized))
+    return render_template(
+        'category/index.html',
+        categories=json.dumps(categories_serialized),
+        current_category_id=current_category_id)
 
 
 @category.route('/categories/new', methods=['POST'])

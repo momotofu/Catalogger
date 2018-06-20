@@ -83,9 +83,9 @@ const CategoryList = function(categories, delegate) {
   }.bind(this)
 
   this.setActiveCategoryId = function(id) {
-      const category = this.getCategory(id)
-      this.delegate.setActiveCategory(category)
-      this.activeCategoryId(id)
+    const category = this.getCategory(id)
+    this.delegate.setActiveCategory(category)
+    this.activeCategoryId(id)
 
   }.bind(this)
 

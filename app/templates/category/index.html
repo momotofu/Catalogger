@@ -222,6 +222,12 @@
       ko.applyBindings(categoryList, document.getElementById('categories'))
       ko.applyBindings(page, document.getElementById('page'))
 
+      // set active category
+      const current_category_id = {{ current_category_id }}
+      if (current_category_id) {
+        categoryList.setActiveCategoryId(current_category_id)
+      }
+
       // set border radius for first visible category in list
       categoryList.setFirstCategoryBorderRadius()
 

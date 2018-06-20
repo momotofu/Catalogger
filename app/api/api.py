@@ -1,6 +1,5 @@
 from flask import Blueprint, send_from_directory
 from flask_login import current_user
-from flask_httpauth import HTTPBasicAuth
 
 from app.app import session
 from app.model import Category, Item
@@ -10,7 +9,6 @@ import json, os
 api = Blueprint('api',
                         __name__,
                         template_folder='templates')
-auth = HTTPBasicAuth()
 
 # API for local assets
 @api.route('/images', defaults={'filename': 'filler.jpg'})

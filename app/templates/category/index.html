@@ -216,17 +216,17 @@
       const page = new Page()
 
       // setup categorylist ViewModel
-      const categoryList = new CategoryList( {{ categories | safe }}, page )
+      const categoryList = new CategoryList(
+        {{ categories | safe }},
+        page,
+        '{{ current_category_id }}' )
+
+      categoryList.init()
 
       // applyBindings
       ko.applyBindings(categoryList, document.getElementById('categories'))
       ko.applyBindings(page, document.getElementById('page'))
 
-      // set active category
-      const current_category_id = '{{ current_category_id }}'
-      if (current_category_id !== 'None') {
-        categoryList.setActiveCategoryId(current_category_id)
-      }
 
       // set border radius for first visible category in list
       categoryList.setFirstCategoryBorderRadius()

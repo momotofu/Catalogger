@@ -39,7 +39,7 @@ class Category {
 }
 
 // ViewModel
-const CategoryList = function(categories, delegate) {
+const CategoryList = function(categories, delegate, category_id) {
   this.delegate = delegate
   this.confirmDeleteModal = $('#confirmDeleteModal')
 
@@ -83,8 +83,6 @@ const CategoryList = function(categories, delegate) {
   }.bind(this)
 
   this.setActiveCategoryId = function(id) {
-    const category = this.getCategory(id)
-    this.delegate.setActiveCategory(category)
     this.activeCategoryId(id)
 
   }.bind(this)
@@ -95,8 +93,6 @@ const CategoryList = function(categories, delegate) {
     this.categories = ko.observableArray(categories.map((category) => {
       return new Category(category)
     }))
-
-    this.setActiveCategoryId(this.categories()[0].id)
   } else {
     this.categories = ko.observableArray([])
   }
@@ -271,6 +267,19 @@ const CategoryList = function(categories, delegate) {
     this.delegate.setActiveCategory(category)
   }, this)
 
+  // setup categoryList
+  this.init = function() {
+    if (category_id !== 'None') {
+      // ensure id is an integer
+      if (typeof(category_id) === 'string') category_id = parseInt(category_id)
+
+      this.setActiveCategoryId(category_id)
+
+    } else if (this.categories().length > 0) {
+      // if there are categories then set active id to the first category
+      this.setActiveCategoryId(this.categories()[0].id)
+    }
+  }
 }
 
 export default CategoryList
